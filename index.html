@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Career Guidance — Tamil Nadu (Class 9–12)</title>
+<style>
+  :root{
+    --bg:#f7fbff;
+    --card:#ffffff;
+    --accent1:#4CAF50; /* green */
+    --accent2:#9C27B0; /* purple */
+    --accent3:#03A9F4; /* sky blue */
+    --accent4:#FF9800; /* orange */
+    --muted:#666;
+    --radius:12px;
+    --maxw:980px;
+  }
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:Inter, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, #eaf6ff 0%, #f7fbff 100%);
+    color:#111;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    display:flex;
+    justify-content:center;
+    padding:24px;
+  }
+  .container{
+    width:100%;
+    max-width:var(--maxw);
+  }
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo{
+    width:64px;height:64px;border-radius:14px;
+    background:linear-gradient(135deg,var(--accent3),var(--accent2));
+    display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
+    box-shadow:0 6px 18px rgba(16,24,40,0.08);
+  }
+  .title{
+    line-height:1;
+  }
+  .title h1{margin:0;font-size:20px;}
+  .title p{margin:0;color:var(--muted);font-size:13px;}
+  .lang-toggle{
+    display:flex;gap:8px;align-items:center;
+  }
+  .lang-toggle button{
+    border:0;background:transparent;padding:8px 12px;border-radius:10px;cursor:pointer;
+    font-weight:600;color:var(--muted);
+  }
+  .lang-toggle button.active{
+    background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;box-shadow:0 6px 18px rgba(3,169,244,0.14);
+  }
+
+  main{
+    display:grid;
+    gap:18px;
+  }
+
+  .hero{
+    background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+    border-radius:var(--radius);
+    padding:18px;
+    display:flex;
+    gap:18px;
+    align-items:center;
+    box-shadow:0 6px 30px rgba(16,24,40,0.06);
+  }
+  .hero .left{flex:1}
+  .hero h2{margin:0 0 6px 0;font-size:18px}
+  .hero p{margin:0;color:var(--muted);font-size:14px}
+  .cta{
+    display:flex;gap:10px;margin-top:12px;
+  }
+  .btn{
+    padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
+  }
+  .btn.primary{background:linear-gradient(90deg,var(--accent2),var(--accent3));color:white;}
+  .btn.secondary{background:transparent;border:2px solid var(--accent3);color:var(--accent3);}
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:18px;
+  }
+  @media (max-width:900px){ .grid{ grid-template-columns:1fr } .hero{flex-direction:column;align-items:flex-start} }
+
+  .card{
+    background:var(--card);
+    border-radius:12px;
+    padding:14px;
+    box-shadow:0 6px 18px rgba(16,24,40,0.04);
+  }
+  .section-title{
+    display:flex;align-items:center;gap:10px;margin-bottom:12px;
+  }
+  .section-title h3{margin:0;font-size:16px;color:var(--accent2)}
+  .small{font-size:13px;color:var(--muted)}
+  .list{padding-left:14px;margin:0}
+  .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#f1f7fb;color:#036; font-weight:600;margin:6px 6px 0 0;font-size:13px}
+
+  /* Quiz */
+  .quiz-questions{display:flex;flex-direction:column;gap:10px}
+  .q{padding:10px;border-radius:10px;border:1px solid #eef4fb;background:linear-gradient(180deg,#ffffff,#fbfeff)}
+  .q p{margin:0 0 8px 0;font-weight:600}
+  .options{display:flex;gap:8px;flex-wrap:wrap}
+  .option{
+    border:1px solid #dfeffb;padding:8px 10px;border-radius:10px;cursor:pointer;background:white;
+  }
+  .option.selected{background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;border:0}
+  .result{
+    padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fff7);border:1px solid #eaf7ee;
+  }
+  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* small helpers */
+  .muted{color:var(--muted)}
+  a.link{color:var(--accent3);font-weight:700;text-decoration:none}
+  .tn-badge{display:inline-block;padding:6px 8px;border-radius:6px;background:linear-gradient(90deg,var(--accent4),var(--accent1));color:white;font-weight:700;font-size:12px}
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden>CG</div>
+      <div class="title">
+        <h1 id="brand-title">Career Guidance — Tamil Nadu</h1>
+        <p id="brand-sub">Class 9 • 10 • 11 • 12 — Plan early, choose wisely</p>
+      </div>
+    </div>
+
+    <div class="lang-toggle" role="tablist" aria-label="Language toggle">
+      <button id="lang-en" class="active" aria-pressed="true">English</button>
+      <button id="lang-ta" aria-pressed="false">தமிழ்</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero card" id="hero">
+      <div class="left">
+        <h2 id="hero-title">Career Guidance for Class 9–12 (Tamil Nadu)</h2>
+        <p id="hero-desc">Short, practical advice | TN-specific routes (TNEA, NEET, TNAU, TNDTE) | Bilingual | Built-in quiz</p>
+        <div class="cta">
+          <button class="btn primary" id="start-quiz">Take the 10-question Quiz</button>
+          <button class="btn secondary" id="download-guide">Download as PDF (print)</button>
+        </div>
+      </div>
+      <div class="right">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+          <div class="tn-badge" id="tn-badge">Tamil Nadu — Useful & Local</div>
+          <div class="small" id="last-updated">Updated: December 2025</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div>
+        <!-- About -->
+        <section class="card">
+          <div class="section-title">
+            <h3 id="about-title">About Career Guidance</h3>
+          </div>
+          <p id="about-p">Early awareness helps students choose subject groups and plan for engineering, medicine, agriculture, arts, commerce, paramedical, and vocational paths. Use the quiz to discover interests — then check stream-specific steps below.</p>
+        </section>
+
+        <!-- Career Paths -->
+        <section class="card" style="margin-top:12px">
+          <div class="section-title">
+            <h3 id="paths-title">Career Paths (Tamil Nadu focus)</h3>
+          </div>
+          <ul class="list" id="paths-list">
+            <li><strong>Engineering</strong> — TNEA counselling after +2 (seek diploma/polytechnic or 4-year BE/BTech). Consider both government and private colleges.</li>
+            <li><strong>Medicine & Allied (MBBS, BDS, AYUSH, Paramedical)</strong> — NEET for MBBS/BDS; paramedical courses via state institutions and private colleges.</li>
+            <li><strong>Agriculture & Veterinary</strong> — TNAU & TANUVAS pathways for BSc Agriculture, B.Tech (Agricultural Engineering), BVSc.</li>
+            <li><strong>Arts & Science</strong> — BSc, BA, BCom — many strong Tamil Nadu colleges and university-affiliated campuses.</li>
+            <li><strong>Polytechnic & Vocational</strong> — TNDTE diplomas, ITI, skill courses for early employment or lateral entry to engineering.</li>
+            <li><strong>Commerce & Professional</strong> — CA, CS, CMA, BCom → professional paths and business/finance roles.</li>
+            <li><strong>Design, Media & IT</strong> — UI/UX, Animation, Computer Science, Data Science; many private institutes and university courses.</li>
+            <li><strong>Government Jobs</strong> — SSC, TNPSC, Railways; good option after +2 or degree with targeted coaching.</li>
+          </ul>
+        </section>
+
+        <!-- Courses after 10/12 -->
+        <section class="card" style="margin-top:12px">
+          <div class="section-title"><h3 id="courses-title">Courses after 10th / 12th</h3></div>
+          <div class="small" id="courses-list">
+            <div class="chip">After 10th: ITI, Polytechnic Diploma, HSC (Academic/Vocational)</div>
+            <div class="chip">After 12th (Science): BE/BTech, MBBS/Paramedical, BSc</div>
+            <div class="chip">After 12th (Commerce): BCom, BBA, CA foundation, professional diplomas</div>
+            <div class="chip">After 12th (Arts): BA, BFA, Social Science & teaching diplomas</div>
+          </div>
+        </section>
+
+        <!-- Scholarships -->
+        <section class="card" style="margin-top:12px">
+          <div class="section-title"><h3 id="sch-title">Scholarships & Support (examples)</h3></div>
+          <ul class="list">
+            <li>State scholarships: BC/MBC, SC/ST scholarships — check TN government education portals.</li>
+            <li>Central schemes: National Means-cum-Merit (NMMS), scholarship portals.</li>
+            <li>Merit awards: School & state merit-based awards for high performers.</li>
+          </ul>
+        </section>
+
+        <!-- Useful links -->
+        <section class="card" style="margin-top:12px">
+          <div class="section-title"><h3 id="links-title">Useful Links (official portals — verify current URLs)</h3></div>
+          <p class="small" id="links-p">Check official portals for latest dates, notifications and counselling details:</p>
+          <ul class="list">
+            <li><a class="link" href="#" id="link-tnea">TNEA / Engineering counselling</a></li>
+            <li><a class="link" href="#" id="link-neet">NEET / Medical admissions</a></li>
+            <li><a class="link" href="#" id="link-tna u">TNAU / Agriculture admissions</a></li>
+            <li><a class="link" href="#" id="link-tndte">TNDTE / Polytechnic</a></li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Right column: Quiz and result -->
+      <aside>
+        <div class="card">
+          <div class="section-title"><h3 id="quiz-title">Career Interest Quiz — 10 short Qs</h3></div>
+          <p class="small" id="quiz-desc">Choose the option that suits you best. There are no right/wrong answers.</p>
+
+          <div class="quiz-questions" id="quiz">
+            <!-- JS will render questions -->
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button class="btn primary" id="submit-quiz">See Suggestions</button>
+            <button class="btn secondary" id="reset-quiz">Reset</button>
+          </div>
+
+          <div id="result-area" style="margin-top:12px;display:none">
+            <div class="result" id="result-box">
+              <!-- result content -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title"><h3 id="mot-title">Motivation Zone</h3></div>
+          <p id="mot-p">“Plan a little, try a little, and keep learning.” — Small steps after Class 10/12 add up to big career wins.</p>
+          <div style="margin-top:10px">
+            <button class="btn primary" id="view-videos">Watch Short Videos</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title"><h3 id="contact-title">Contact / School Cell</h3></div>
+          <p class="small" id="contact-p">School Career Guidance cell: meet your school counsellor for personalised advice. Use local college counselling offices for application help.</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div id="footer-text">Built for Tamil Nadu students • Use as guidance, always confirm with official admission portals.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+/*
+  Bilingual strings: English (en) and Tamil (ta)
+  Keep strings reasonably short for readability.
+*/
+const STR = {
+  en: {
+    brandTitle: 'Career Guidance — Tamil Nadu',
+    brandSub: 'Class 9 • 10 • 11 • 12 — Plan early, choose wisely',
+    heroTitle: 'Career Guidance for Class 9–12 (Tamil Nadu)',
+    heroDesc: 'Short, practical advice | TN-specific routes (TNEA, NEET, TNAU, TNDTE) | Bilingual | Built-in quiz',
+    aboutTitle: 'About Career Guidance',
+    aboutP: 'Early awareness helps students choose subject groups and plan for engineering, medicine, agriculture, arts, commerce and vocational paths. Use the quiz to discover interests — then check the stream steps below.',
+    pathsTitle: 'Career Paths (Tamil Nadu focus)',
+    coursesTitle: 'Courses after 10th / 12th',
+    schTitle: 'Scholarships & Support (examples)',
+    linksTitle: 'Useful Links (official portals — verify current URLs)',
+    quizTitle: 'Career Interest Quiz — 10 short Qs',
+    quizDesc: 'Choose the option that suits you best. There are no right/wrong answers.',
+    motTitle: 'Motivation Zone',
+    motP: '“Plan a little, try a little, and keep learning.” — Small steps add up to big career wins.',
+    contactTitle: 'Contact / School Cell',
+    contactP: 'School Career Guidance cell: meet your school counsellor for personalised advice.',
+    footer: 'Built for Tamil Nadu students • Use as guidance, always confirm with official admission portals.',
+    startQuiz: 'Take the 10-question Quiz',
+    downloadGuide: 'Download as PDF (print)',
+    viewVideos: 'Watch Short Videos',
+    tnBadge: 'Tamil Nadu — Useful & Local',
+    lastUpdated: 'Updated: December 2025',
+    links: {
+      tnea: 'TNEA — Engineering counselling (check official portal)',
+      neet: 'NEET — Medical admissions (check official portal)',
+      tnau: 'TNAU / TANUVAS — Agriculture & Veterinary (check portal)',
+      tndte: 'TNDTE — Polytechnic diplomas (check portal)'
+    },
+    quizQuestions: [
+      {q:'Do you enjoy solving math or logical puzzles?', a:['Yes — I like numbers','Not really','Sometimes']},
+      {q:'Do you like working with living things (plants/animals)?', a:['Yes','A little','Not at all']},
+      {q:'Do you enjoy reading and writing about people/society?', a:['Yes','Sometimes','No']},
+      {q:'Do you prefer drawing, designing or creative arts?', a:['Yes — very creative','Somewhat','No']},
+      {q:'Do you like building or fixing machines/devices?', a:['Love it','Sometimes','No']},
+      {q:'Do you enjoy teaching, helping or social work?', a:['Yes','A bit','No']},
+      {q:'Do you like computer programming or technology?', a:['Yes','A little','Not really']},
+      {q:'Do you want a steady government job or service?', a:['Yes','Maybe later','No']},
+      {q:'Do you prefer business, sales or starting a small enterprise?', a:['Yes','Maybe','No']},
+      {q:'Do you enjoy lab work and experiments?', a:['Yes','Sometimes','No']}
+    ],
+    suggestionsIntro: 'Your top suggested fields:',
+    suggestionsExplain: 'Short next steps (Tamil Nadu):',
+    reset: 'Reset'
+  },
+  ta: {
+    brandTitle: 'தொழில் வழிகாட்டு — தமிழ்நாடு',
+    brandSub: 'தரம் 9 • 10 • 11 • 12 — முன்பே திட்டமிடு, சரியாக தேர்வு செய்',
+    heroTitle: 'தர 9–12 மாணவர்களுக்கு தொழில் வழிகாட்டு (தமிழ்நாடு)',
+    heroDesc: 'சுருக்கமான, நடைமுறையான அறிவுரைகள் | தமிழ்நாடு வழிகள் (TNEA, NEET, TNAU, TNDTE) | இருமொழி | குறுகிய வினாடி परीक्षणம்',
+    aboutTitle: 'தொழில் வழிகாட்டைப் பற்றி',
+    aboutP: 'முன்புதகவல் மாணவர்கள் பாடபிரிவுகளை தேர்ந்தெடுக்க உதவும் மற்றும் பொறியியல், மருத்துவம், வேளாண்மை, கலை, வணிகம் மற்றும் தொழில்முறை வழிகளில் திட்டமிட உதவும். ஆர்வத்தை கண்டறியக் கூட Quiz பயன்படுத்தவும்.',
+    pathsTitle: 'தொழில் வழிகள் (தமிழ்நாடு நோக்கு)',
+    coursesTitle: '10ஆம் / 12ஆம் பிறகு படிப்புகள்',
+    schTitle: 'அனுதாபங்கள் மற்றும் உதவிகள் (மாதிரிகள்)',
+    linksTitle: 'உபயோகமான இணைப்புகள் (அதிகாரம் சரிபார்)',
+    quizTitle: 'தொழில் ஆர்வம் - 10 குறுகிய கேள்விகள்',
+    quizDesc: 'உங்களுக்கு பொருத்தமானவை தேர்ந்தெடுக்கவும். தவறு/சரி இல்லை.',
+    motTitle: 'மனோபலத் தளம்',
+    motP: '“சிறிது திட்டமிடு, சிறிது முயலு, தொடர்ந்து கற்று கொள்.” — சிறிய படிகள் பெரிய வெற்றிக்கு வழிகாட்டும்.',
+    contactTitle: 'தொடர்பு / பாடசாலை அணிகலம்',
+    contactP: 'பரிந்துரைக்க: உங்கள் பாடசாலை தொழில் வழிகாட்டி அணியிடம் நேரில் ஆலோசனை alın.',
+    footer: 'தமிழ்நாடு மாணவர்களுக்கு கட்டமைக்கப்பட்டது • வழிகாட்டலாக பயன்படுத்தவும், நுழைவுகள் அதிகாரப்பூர்வ தளத்தில் சரிபார்.',
+    startQuiz: '10 கேள்விகள் கொண்ட Quiz தொடங்கு',
+    downloadGuide: 'PDF ஆக (அச்சு) பதிவிறக்கு',
+    viewVideos: 'குறுகிய வீடியோக்கள் பார்',
+    tnBadge: 'தமிழ்நாடு — பயனுள்ள மற்றும் உள்ளூர்',
+    lastUpdated: 'புதுப்பிக்கப்பட்டது: டிசம்பர் 2025',
+    links: {
+      tnea: 'TNEA — பொறியியல் காம்ஸலிங் (அதிகாரப்பூர்வ தளத்தை சரிபார்)',
+      neet: 'NEET — மருத்துவ நுழைவுகள் (அதிகாரப்பூர்வ தளத்தை சரிபார்)',
+      tnau: 'TNAU / TANUVAS — வேளாண்மை, விலங்கு (அதிகாரப்பூர்வ தளம்)',
+      tndte: 'TNDTE — பாலிடெக்னிக் (அதிகாரப்பூர்வ தளம்)'
+    },
+    quizQuestions: [
+      {q:'எண்கள்/திருக்கூறுகளில் சவால் தீர்க்க விரும்புகிறீர்களா?', a:['ஆம் — எண்கள் பிடிக்கும்','அவனில்லை','சில நேரங்கள்']},
+      {q:'செடிகள்/விலங்குகளுடன் வேலை செய்வதில் ஆர்வமுண்டா?', a:['ஆம்','சற்றே','மொத்தமும் இல்லை']},
+      {q:'மக்கள்/சமுதாயத்தைப் பற்றி வாசிப்பதும் எழுதுவதும் சொந்தமாக இருக்கும்?', a:['ஆம்','சில நேரம்','இல்லை']},
+      {q:'வரைதல், வடிவமைப்பு அல்லது படைப்பாற்றலில் ஆர்வமுண்டா?', a:['ஆம் — மிகவும்','சற்று','இல்லை']},
+      {q:'உயிரணுவுகள்/யந்திரங்களை கட்டவும் சரி செய்யவும் விரும்புகிறீர்களா?', a:['ஆர்வம்','சிலமுறை','இல்லை']},
+      {q:'பயிற்சி, உதவி அல்லது சமூக வேலை செய்ய விரும்புகிறீர்களா?', a:['ஆம்','சிறிது','இல்லை']},
+      {q:'கணினி நிரலாக்கம் அல்லது தொழில்நுட்பம் பிடிக்குமா?', a:['ஆம்','சற்று','அவ்வளமில்லை']},
+      {q:'நிலையான அரசு வேலை வேண்டுமா?', a:['ஆம்','பின்னர் என்று பார்க்கலாம்','இல்லை']},
+      {q:'வணிகம், விற்பனை அல்லது சிறு עסק தொடங்க விருப்பமுண்டா?', a:['ஆம்','முடியும்','இல்லை']},
+      {q:' ஆய்வக வேலை மற்றும் பரிசோதனைகளை விரும்புகிறீர்களா?', a:['ஆம்','சில நேரம்','இல்லை']}
+    ],
+    suggestionsIntro: 'உங்கள் தலைசிறந்த பரிந்துரைகள்:',
+    suggestionsExplain: 'தமிழ்நாடு குறிப்பான அடுத்த படிகள்:',
+    reset: 'மீட்டமை'
+  }
+};
+
+let LANG = 'en';
+
+/* Simple scoring model mapping answers to R/I/A/S/E/C-like buckets:
+   We'll map each question's selected option to one of these buckets.
+   Keys: R=Realistic (build/fix), I=Investigative (science/lab), A=Artistic, S=Social (helping), E=Enterprising (business), C=Conventional (steady/govt)
+*/
+const BUCKET_NAMES = {
+  en: {R:'Engineering/Hands-on', I:'Science/Medical/Lab', A:'Design/Creative', S:'Teaching/Social/Service', E:'Business/Entrepreneurship', C:'Government/Clerical'},
+  ta: {R:'பொறியியல் / கைதிறன்', I:'அறிவியல் / மருத்துவம் / ஆய்வு', A:'வடிவமைப்பு / படைப்பாற்றல்', S:'கற்பித்தல் / சமூக சேவை', E:'வணிகம் / தொழில் துவக்கம்', C:'அரசு / நிர்வாக'}
+};
+
+// Define how each question's option maps to buckets (option index 0,1,2)
+const Q_MAP = [
+  /*1*/ ['C','I','A'],      // math/logical -> I or C or sometimes A
+  /*2*/ ['I','S','A'],      // living things -> I or S
+  /*3*/ ['S','A','C'],      // reading about society -> S
+  /*4*/ ['A','C','R'],      // creative -> A
+  /*5*/ ['R','I','C'],      // building machines -> R
+  /*6*/ ['S','C','I'],      // teaching/helping -> S
+  /*7*/ ['I','C','A'],      // programming -> I
+  /*8*/ ['C','E','A'],      // steady government -> C
+  /*9*/ ['E','C','S'],      // business -> E
+  /*10*/['I','R','C']      // lab work -> I
+];
+
+const QUESTIONS = STR.en.quizQuestions; // length 10
+let answers = Array(QUESTIONS.length).fill(null);
+
+function $(id){ return document.getElementById(id) }
+
+/* Render UI strings for current language */
+function renderLang(){
+  const s = STR[LANG];
+  $('brand-title').textContent = s.brandTitle;
+  $('brand-sub').textContent = s.brandSub;
+  $('hero-title').textContent = s.heroTitle;
+  $('hero-desc').textContent = s.heroDesc;
+  $('about-title').textContent = s.aboutTitle;
+  $('about-p').textContent = s.aboutP;
+  $('paths-title').textContent = s.pathsTitle;
+  $('courses-title').textContent = s.coursesTitle;
+  $('sch-title').textContent = s.schTitle;
+  $('links-title').textContent = s.linksTitle;
+  $('quiz-title').textContent = s.quizTitle;
+  $('quiz-desc').textContent = s.quizDesc;
+  $('mot-title').textContent = s.motTitle;
+  $('mot-p').textContent = s.motP;
+  $('contact-title').textContent = s.contactTitle;
+  $('contact-p').textContent = s.contactP;
+  $('footer-text').textContent = s.footer;
+  $('start-quiz').textContent = s.startQuiz;
+  $('download-guide').textContent = s.downloadGuide;
+  $('view-videos').textContent = s.viewVideos;
+  $('tn-badge').textContent = s.tnBadge;
+  $('last-updated').textContent = s.lastUpdated;
+
+  // Links text
+  $('link-tnea').textContent = s.links.tnea;
+  $('link-neet').textContent = s.links.neet;
+  $('link-tna u').textContent = s.links.tnau;
+  $('link-tndte').textContent = s.links.tndte;
+
+  // Quiz questions replace
+  renderQuiz();
+}
+
+/* Render quiz questions */
+function renderQuiz(){
+  const container = $('quiz');
+  container.innerHTML = '';
+  const s = STR[LANG];
+  const qlist = s.quizQuestions;
+  qlist.forEach((qobj, idx) => {
+    const qdiv = document.createElement('div');
+    qdiv.className = 'q';
+    qdiv.setAttribute('data-idx', idx);
+    const p = document.createElement('p');
+    p.textContent = (idx+1) + '. ' + qobj.q;
+    qdiv.appendChild(p);
+
+    const opts = document.createElement('div');
+    opts.className = 'options';
+    qobj.a.forEach((optText, oidx) => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.textContent = optText;
+      btn.setAttribute('data-oidx', oidx);
+      btn.addEventListener('click', () => {
+        // mark selection
+        answers[idx] = oidx;
+        // update UI
+        Array.from(opts.children).forEach(c => c.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+      opts.appendChild(btn);
+    });
+    qdiv.appendChild(opts);
+    container.appendChild(qdiv);
+  });
+  }
+
+/* Compute quiz result */
+function computeResult(){
+  // if any unanswered, allow partial but warn
+  const s = STR[LANG];
+  let counts = {R:0,I:0,A:0,S:0,E:0,C:0};
+  for(let i=0;i<QUESTIONS.length;i++){
+    const sel = answers[i];
+    if(sel === null) continue;
+    const bucket = Q_MAP[i][sel];
+    counts[bucket] = (counts[bucket] || 0) + 1;
+  }
+  // sort buckets by count
+  const sorted = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+  const top = sorted.slice(0,3).filter(k => counts[k] > 0);
+  return {counts, top};
+}
+
+/* Show result with TN-specific tips */
+function showResult(){
+  const s = STR[LANG];
+  const res = computeResult();
+  const resultBox = $('result-box');
+  resultBox.innerHTML = '';
+
+  if(res.top.length === 0){
+    resultBox.innerHTML = `<div class="small">${LANG==='en' ? 'No answers selected yet. Please answer some questions.' : 'எந்தவொரு தேர்வும் செய்யப்படவில்லை. சில கேள்விகளுக்கு பதில் அளிக்கவும்.'}</div>`;
+    $('result-area').style.display = 'block';
+    return;
+  }
+
+  // Titles
+  const heading = document.createElement('div');
+  heading.style.marginBottom = '8px';
+  heading.innerHTML = `<strong>${s.suggestionsIntro}</strong>`;
+  resultBox.appendChild(heading);
+
+  // Map bucket codes to labels per language
+  const bnames = BUCKET_NAMES[LANG];
+  res.top.forEach(code => {
+    const line = document.createElement('div');
+    line.style.marginBottom = '8px';
+    line.innerHTML = `<div style="font-weight:800">${bnames[code]}</div><div class="small" style="margin-top:4px">${getBucketAdvice(code)}</div>`;
+    resultBox.appendChild(line);
+  });
+
+  // Explanation and TN-specific next steps
+  const expl = document.createElement('div');
+  expl.style.marginTop = '10px';
+  expl.innerHTML = `<hr style="border:none;border-top:1px solid #eef7f7;margin:6px 0" />
+    <div style="font-weight:800">${s.suggestionsExplain}</div>
+    <ul class="small" style="margin:6px 0 0 18px">
+      <li>${LANG==='en' ? 'For Engineering: prepare for TNEA counselling; consider diploma or entrance coaching after +2.' : 'பொறியியல்: +2 பின் TNEA ஆலோசனை; டிப்பிளமா அல்லது நுழைவுத் தயார் வகுப்புகளை பரிசீலிக்கவும்.'}</li>
+      <li>${LANG==='en' ? 'For Medicine: NEET is required for MBBS/BDS. Paramedical and allied courses have state and private options.' : 'மருத்துவம்: MBBS/BDS க்கு NEET அவசியம். பராமெடிக்கல் மற்றும் சார்ந்த படிப்புகள் அரசு/தனியார் வாய்ப்புகள் உள்ளன.'}</li>
+      <li>${LANG==='en' ? 'Polytechnic & Skill: TNDTE diplomas and ITI offer early job skills after 10th.' : 'பாலிடெக்னிக் & திறன்: TNDTE டிப்பிளமாக்கள் மற்றும் ITI 10ஆம் பிறகு வேலைத் திறன்களை வழங்கும்.'}</li>
+      <li>${LANG==='en' ? 'Agriculture & Vet: Check TNAU/TANUVAS for BSc Agriculture, BVSc and related admissions.' : 'வேளாண்மை & விலங்கு: BSc வேளாண்மை, BVSc போன்ற நுழைவுகளுக்காக TNAU/TANUVAS ஐ சரிபார்க்கவும்.'}</li>
+    </ul>
+  `;
+  resultBox.appendChild(expl);
+    // Call-to-action: counselling and verify links
+  const cta = document.createElement('div');
+  cta.style.marginTop='10px';
+  cta.innerHTML = `<div class="small"><strong>${LANG==='en' ? 'Next steps:' : 'அடுத்த படிகள்:'}</strong>
+    <ul style="margin:6px 0 0 18px" class="small">
+      <li>${LANG==='en' ? 'Meet your school career counsellor for personalised guidance.' : 'தனிப்பட்ட வழிகாட்டலுக்கு உங்கள் பாடசாலை ஆலோசகரைப் பார்க்கவும்.'}</li>
+      <li>${LANG==='en' ? 'Visit official admission portals for TNEA, NEET, TNAU, TNDTE for dates and processes.' : 'காலக்குரிய மற்றும் செயல்முறைகளுக்கான அதிகாரப்பூர்வ தளங்களைப் பார்க்கவும்.'}</li>
+      <li>${LANG==='en' ? 'Try short internships, online workshops or vocational courses to explore skills.' : 'திறன்களை ஆராய சிறிய இன்டர்ன்ஷிப்கள் மற்றும் ஆன்லைன் பட்டறைகள் செய்யவும்.'}</li>
+    </ul></div>`;
+  resultBox.appendChild(cta);
+
+  // Display
+  $('result-area').style.display = 'block';
+}
+
+/* Bucket advice (short) */
+function getBucketAdvice(code){
+  if(LANG==='en'){
+    switch(code){
+      case 'R': return 'You like hands-on & building — consider Engineering, Mechanical, Civil, EEE, or Polytechnic diplomas.';
+      case 'I': return 'You enjoy science & lab work — consider Medical, Biology, Chemistry, Research, or BSc courses.';
+      case 'A': return 'Creative skills suit Design, Architecture, Multimedia, Animation, or Fine Arts.';
+      case 'S': return 'You like helping others — consider Teaching, Social Work, Nursing, or Allied Health.';
+      case 'E': return 'Business interest — consider Commerce, BBA, Entrepreneurship, or vocational business courses.';
+      case 'C': return 'Prefer stability — consider Government exams, Clerical roles, Administrative courses, or Civil Services study.';
+      default: return '';
+    }
+  } else {
+    switch(code){
+      case 'R': return 'நீங்கள் கைப்பணிகளில் ஆர்வமாக இருக்கிறீர்கள் — பொறியியல், மெக்கானிக்கல், சிவில் அல்லது டிப்ப்ளொமாஸ் பரிசீலிக்கவும்.';
+      case 'I': return 'அறிவியல் மற்றும் ஆய்வில் ஆர்வம் — மருத்துவம், உயிரியல், ரசாயனம், ஆராய்ச்சி அல்லது BSc படிப்புகள்.';
+      case 'A': return 'படைத்திறன் பொருத்தம் — டிசைன், கட்டிடக் கலை, அனிமேஷன் அல்லது நுணுக்க கலை.';
+      case 'S': return 'ஒருவனுக்கு உதவ விரும்புகிறீர்கள் — கற்பித்தல், சமுகப் பணிகள், நர்சிங் அல்லது சுகாதார உதவி.';
+      case 'E': return 'வணிகத்தில் ஆர்வம் — கம்பர்ஸ், BBA, தொழில்முனைவோர் படிப்புகள்.';
+      case 'C': return 'நிலையான வேலை விருப்பம் — அரசு தேர்வுகள், நிர்வாக பாடங்கள் அல்லது திரைவியல்புகள்.';
+      default: return '';
+    }
+  }
+}
+
+/* UI events */
+function setup(){
+  // language toggles
+  $('lang-en').addEventListener('click', ()=>{ setLang('en'); });
+  $('lang-ta').addEventListener('click', ()=>{ setLang('ta'); });
+
+  // start quiz scroll
+  $('start-quiz').addEventListener('click', ()=> {
+    document.querySelector('#quiz').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  // download guide: triggers print dialog for quick PDF
+  $('download-guide').addEventListener('click', ()=> {
+    window.print();
+  });
+
+  $('submit-quiz').addEventListener('click', ()=> {
+    showResult();
+    document.querySelector('#result-box').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  $('reset-quiz').addEventListener('click', ()=> {
+    answers = Array(QUESTIONS.length).fill(null);
+    renderQuiz();
+    $('result-area').style.display = 'none';
+  });
+
+  // view videos placeholder
+  $('view-videos').addEventListener('click', ()=> {
+    alert(LANG==='en' ? 'Search YouTube: "Career guidance Tamil Nadu" for short videos.' : 'YouTube-ல் தேடவும்: "Career guidance Tamil Nadu" என்ற விசையால் குறுகிய வீடியோக்கள் காணலாம்.');
+  });
+
+  // helpful: attach sample links to open in new tab (user should verify)
+  $('link-tnea').href = 'https://tneaonline.org/';
+  $('link-neet').href = 'https://nta.ac.in/'; // NEET details often via NTA
+  $('link-tna u').href = 'https://tnau.ac.in/';
+  $('link-tndte').href = 'https://www.tndte.gov.in/';
+
+  renderLang();
+}
+
+/* set language */
+function setLang(l){
+  LANG = l;
+  // toggle active class
+  if(l==='en'){
+    $('lang-en').classList.add('active');
+    $('lang-en').setAttribute('aria-pressed','true');
+    $('lang-ta').classList.remove('active');
+    $('lang-ta').setAttribute('aria-pressed','false');
+    document.documentElement.lang = 'en';
+  } else {
+    $('lang-ta').classList.add('active');
+    $('lang-ta').setAttribute('aria-pressed','true');
+    $('lang-en').classList.remove('active');
+    $('lang-en').setAttribute('aria-pressed','false');
+    document.documentElement.lang = 'ta';
+  }
+  renderLang();
+}
+
+/* Initialization */
+setup();
+
+</script>
+</body>
+</html>
