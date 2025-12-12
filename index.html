@@ -3,294 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder</title>
+    <title id="page-title">உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - GTK Pathfinder</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* --- 1. General Styling --- */
         body {
             font-family: 'Noto Sans Tamil', 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6; /* Light background */
+            background-color: #f4f7f6;
             color: #333;
             line-height: 1.6;
-            scroll-behavior: smooth;
         }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* --- 2. Header & Hero Section --- */
         .hero-section {
-            background: linear-gradient(135deg, #007bff, #00c6ff); /* Vibrant blue gradient */
+            background: linear-gradient(135deg, #007bff, #00c6ff);
             color: white;
             padding: 60px 20px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        .hero-section h1 { font-size: 2.5em; margin-bottom: 5px; }
 
-        .hero-section h1 {
-            font-size: 2.5em;
-            margin-bottom: 5px;
-        }
-
-        /* Language Selector */
         .lang-selector button {
-            background-color: #ffc107; /* Yellow accent */
+            background-color: #ffc107;
             border: none;
             padding: 8px 15px;
             margin: 5px;
             cursor: pointer;
             border-radius: 5px;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
         }
+        .lang-selector button:hover { background-color: #e0a800; transform: scale(1.05); }
 
-        .lang-selector button:hover {
-            background-color: #e0a800;
-            transform: scale(1.05);
-        }
-
-        /* --- 3. Motivation Card --- */
         .motivation-card {
-            background-color: #28a745; /* Inspiring Green */
+            background-color: #28a745;
             color: white;
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 4. Quiz Section & Cards --- */
         .quiz-section {
             background-color: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
             margin-bottom: 30px;
         }
-
-        .quiz-section h2 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+        .quiz-section h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
 
         .question-card {
             background-color: #f8f9fa;
             padding: 15px;
-            border-left: 5px solid #ffc107; /* Yellow marker */
+            border-left: 5px solid #ffc107;
             margin-bottom: 15px;
             border-radius: 5px;
         }
 
-        .question-card label {
-            display: block;
-            cursor: pointer;
-            padding: 5px 0;
-        }
-
-        /* Interactive Buttons */
         #submit-btn {
-            background-color: #dc3545; /* Red/Maroon for action */
+            background-color: #dc3545;
             color: white;
             border: none;
             padding: 12px 25px;
             font-size: 1.1em;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
-            transition: background-color 0.3s;
+            margin-top: 20px;
         }
-
-        #submit-btn:hover {
-            background-color: #c82333;
-        }
-
-        /* --- 5. Results Section --- */
-        .results-section {
-            margin-top: 40px;
-        }
+        #submit-btn:hover { background-color: #c82333; }
 
         .stream-result {
             font-size: 1.5em;
             font-weight: bold;
             color: #007bff;
-            margin-top: 10px;
-            padding: 15px;
+            padding: 20px;
             background-color: #e9ecef;
-            border-radius: 5px;
+            border-radius: 8px;
             text-align: center;
+            margin: 20px 0;
         }
 
         .admissions-card, .scholarship-card {
-            background-color: white;
-            border-radius: 10px;
+            background: white;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-top: 5px solid #17a2b8; /* Cyan for info */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-top: 5px solid #17a2b8;
         }
 
-        .admissions-card a, .scholarship-card a {
-            display: inline-block;
-            background-color: #17a2b8;
-            color: white;
-            padding: 8px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .admissions-card a:hover, .scholarship-card a:hover {
-            background-color: #117a8b;
-        }
-
-        #resource-links {
-            list-style: none;
-            padding: 0;
-        }
-        #resource-links li {
-            background-color: #e8f5e9; /* Very light green */
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        #resource-links li a {
-            color: #28a745;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        /* --- 6. Floating Chatbot Dialogue Box --- */
+        /* ========== GROK AI CHATBOT ========== */
         #chatbot-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #ff6f00; /* Orange/Motivational Color */
+            bottom: 25px;
+            right: 25px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #ff6f00, #ff8f00);
             color: white;
             border: none;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             z-index: 1000;
-            transition: background-color 0.3s, transform 0.2s;
         }
-        
-        #chatbot-toggle:hover {
-            background-color: #e65100;
-            transform: scale(1.1);
-        }
+        #chatbot-toggle:hover { transform: scale(1.1); }
 
         #chatbot-box {
             position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 350px;
-            height: 450px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            display: none; /* Hidden by default */
+            bottom: 100px;
+            right: 25px;
+            width: 380px;
+            height: 580px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
             flex-direction: column;
             z-index: 1000;
+            border: 4px solid #ff6f00;
             overflow: hidden;
-            border: 2px solid #ff6f00;
         }
-
         #chatbot-header {
-            background-color: #ff6f00;
+            background: linear-gradient(135deg, #ff6f00, #ff9a00);
             color: white;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
             font-weight: bold;
+            font-size: 1.1em;
         }
-
-        #chatbot-messages {
-            flex-grow: 1;
-            padding: 10px;
-            overflow-y: auto;
-            background-color: #f0f4f7;
-        }
-
-        .message {
-            margin-bottom: 10px;
-            padding: 8px 12px;
-            border-radius: 15px;
-            max-width: 80%;
-            line-height: 1.4;
-        }
-
-        .user-message {
-            background-color: #007bff;
-            color: white;
-            margin-left: auto;
-            text-align: right;
-        }
-
-        .bot-message {
-            background-color: #e9ecef;
-            color: #333;
-            margin-right: auto;
-            text-align: left;
-        }
-
-        #chatbot-input-container {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-        }
-
-        #chatbot-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            margin-right: 10px;
-        }
-
-        #chatbot-send {
-            background-color: #007bff;
-            color: white;
+        #grok-iframe {
+            flex: 1;
             border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            width: 100%;
+            height: 100%;
         }
 
-        #chatbot-send:hover {
-            background-color: #0056b3;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #eee;
-            color: #555;
-            font-size: 0.9em;
-        }
+        footer { text-align: center; padding: 20px; background:#eee; margin-top:50px; }
     </style>
 </head>
 <body>
 
     <header class="hero-section">
-        <h1 id="header-title">உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder</h1>
-        <p id="header-subtitle">9 முதல் 12 ஆம் வகுப்பு மாணவர்களுக்கான தொழில் வழிகாட்டி</p>
+        <h1 id="header-title">உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - GTK Pathfinder</h1>
+        <p id="header-subtitle">மாணவர்களுக்கான தொழில் வழிகாட்டி</p>
         <div class="lang-selector">
             <button id="lang-en" onclick="setLanguage('en')">English</button>
             <button id="lang-ta" onclick="setLanguage('ta')">தமிழ்</button>
@@ -299,366 +157,140 @@
 
     <main class="container">
         <section class="motivation-card">
-            <h2 id="mot-heading">உங்கள் திறனை ஆராயுங்கள்! (Explore Your Potential!)</h2>
+            <h2 id="mot-heading">உங்கள் திறனை ஆராயுங்கள்!</h2>
             <p id="mot-quote">"எதிர்காலம் என்பது, அவர்களின் கனவுகளின் அழகை நம்புபவர்களுக்குச் சொந்தமானது." - எலினோர் ரூஸ்வெல்ட்</p>
         </section>
 
         <section class="quiz-section">
-            <h2 id="quiz-title">உங்கள் நாட்டத்தை மதிப்பிடுங்கள் (Aptitude Assessment)</h2>
+            <h2 id="quiz-title">உங்கள் நாட்டத்தை மதிப்பிடுங்கள்</h2>
             <form id="aptitude-quiz">
                 <div class="question-card">
-                    <p id="q1">1. சிக்கலான கணிதப் பிரச்சனைகளைத் தீர்ப்பதில் நீங்கள் மகிழ்ச்சி அடைகிறீர்களா? (Do you enjoy solving complex math problems?)</p>
-                    <label><input type="radio" name="q1" value="sci-math" required> <span id="q1-opt1">ஆம் (Yes)</span></label><br>
-                    <label><input type="radio" name="q1" value="arts-hum"> <span id="q1-opt2">இல்லை (No)</span></label>
+                    <p id="q1">1. சிக்கலான கணிதப் பிரச்சனைகளைத் தீர்ப்பதில் நீங்கள் மகிழ்ச்சி அடைகிறீர்களா?</p>
+                    <label><input type="radio" name="q1" value="sci-math" required> <span id="q1-opt1">ஆம்</span></label><br>
+                    <label><input type="radio" name="q1 value="arts-hum"> <span id="q1-opt2">இல்லை</span></label>
                 </div>
-                
                 <div class="question-card">
-                    <p id="q2">2. கதை எழுதுவது, ஓவியம் வரைவது அல்லது இசை உருவாக்குவதில் நீங்கள் ஆர்வம் உள்ளவரா? (Are you interested in writing stories, painting, or creating music?)</p>
-                    <label><input type="radio" name="q2" value="arts-hum" required> <span id="q2-opt1">ஆம் (Yes)</span></label><br>
-                    <label><input type="radio" name="q2" value="commerce"> <span id="q2-opt2">இல்லை (No)</span></label>
+                    <p id="q2">2. கதை எழுதுவது, ஓவியம் வரைவது அல்லது இசை உருவாக்குவதில் ஆர்வம் உள்ளதா?</p>
+                    <label><input type="radio" name="q2" value="arts-hum" required> <span id="q2-opt1">ஆம்</span></label><br>
+                    <label><input type="radio" name="q2" value="commerce"> <span id="q2-opt2">இல்லை</span></label>
                 </div>
-
-                 <div class="question-card">
-                    <p id="q3">3. சந்தை போக்குகளைப் பற்றி பகுப்பாய்வு செய்வதிலும், பணம் மற்றும் நிதி மேலாண்மையிலும் நீங்கள் ஆர்வம் உள்ளவரா? (Are you interested in analyzing market trends, and managing money and finance?)</p>
-                    <label><input type="radio" name="q3" value="commerce" required> <span id="q3-opt1">ஆம் (Yes)</span></label><br>
-                    <label><input type="radio" name="q3" value="sci-math"> <span id="q3-opt2">இல்லை (No)</span></label>
+                <div class="question-card">
+                    <p id="q3">3. சந்தை, பங்குச் சந்தை, பண மேலாண்மை போன்றவற்றில் ஆர்வம் உள்ளதா?</p>
+                    <label><input type="radio" name="q3" value="commerce" required> <span id="q3-opt1">ஆம்</span></label><br>
+                    <label><input type="radio" name="q3" value="sci-math"> <span id="q3-opt2">இல்லை</span></label>
                 </div>
-                
-                <button type="button" onclick="submitQuiz()" id="submit-btn">முடிவுகளைப் பார்க்கவும் (See Results)</button>
+                <button type="button" onclick="submitQuiz()" id="submit-btn">முடிவுகளைப் பார்க்கவும்</button>
             </form>
         </section>
 
-        <section class="results-section" id="results-section">
-            <h2 id="results-heading">உங்கள் பரிந்துரைக்கப்பட்ட பாதை (Your Recommended Path)</h2>
-            <div id="suggested-stream" class="stream-result">உங்கள் நாட்டத்தை மதிப்பிடுங்கள் (Take the assessment above)</div>
-            
-            <h3 id="resources-title">முக்கிய ஆதாரங்கள் மற்றும் இணைப்புகள் (Key Resources & Links)</h3>
-            <ul id="resource-links">
-                </ul>
+        <section id="results-section">
+            <h2 id="results-heading">உங்கள் பரிந்துரைக்கப்பட்ட பாதை</h2>
+            <div id="suggested-stream" class="stream-result">மேலே உள்ள கேள்விகளுக்கு பதில் அளிக்கவும்</div>
+            <ul id="resource-links"></ul>
 
             <div class="admissions-card">
-                <h4 id="admissions-title">சேர்க்கை வழிகாட்டி (Admissions Guide)</h4>
-                <p id="admissions-content">TNEA, NEET, JEE போன்ற நுழைவுத் தேர்வுகளுக்கான விண்ணப்பப் படிவங்கள் மற்றும் கால அட்டவணைகள் இங்கே கிடைக்கும். (Application forms and schedules for entrance exams like TNEA, NEET, JEE are available here.)</p>
-                <a href="#" id="admissions-link" target="_blank">மேலும் அறிக (Learn More)</a>
+                <h4 id="admissions-title">சேர்க்கை வழிகாட்டி</h4>
+                <p id="admissions-content">TNEA, NEET, JEE போன்ற நுழைவுத் தேர்வுகளுக்கான இணைப்புகள்.</p>
+                <a href="#" id="admissions-link" target="_blank">மேலும் அறிக</a>
             </div>
-            
+
             <div class="scholarship-card">
-                <h4 id="scholarship-title">உதவித்தொகை வாய்ப்புகள் (Scholarship Opportunities)</h4>
-                <p id="scholarship-content">முதல் பட்டதாரி உதவித்தொகை, கல்வி கடன் திட்டங்களுக்கான இணைப்புகள். (Links for First Graduate Scholarship, educational loan schemes.)</p>
-                <a href="#" id="scholarship-link" target="_blank">விண்ணப்பிக்கவும் (Apply Now)</a>
+                <h4 id="scholarship-title">உதவித்தொகை வாய்ப்புகள்</h4>
+                <p id="scholarship-content">முதல் பட்டதாரி உதவித்தொகை, கல்விக் கடன் போன்றவை.</p>
+                <a href="#" id="scholarship-link" target="_blank">விண்ணப்பிக்கவும்</a>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Pathfinder - தமிழ்நாடு மாணவர்களுக்கான வழிகாட்டி</p>
+        <p>© 2025 GTK Pathfinder - மாணவர்களுக்கான வழிகாட்டி</p>
     </footer>
 
-    <button id="chatbot-toggle">💬</button>
+    <!-- GROK AI CHATBOT (இலவசம் + உண்மையான AI) -->
+    <button id="chatbot-toggle">AI</button>
     <div id="chatbot-box">
-        <div id="chatbot-header" data-en="Ask a Career Expert" data-ta="ஒரு தொழில் வழிகாட்டியிடம் கேளுங்கள்">ஒரு தொழில் வழிகாட்டியிடம் கேளுங்கள்</div>
-        <div id="chatbot-messages">
-            <div class="message bot-message" id="initial-bot-message">Hello! Ask me any question about career options, courses in Tamil Nadu, or entrance exams!</div>
-        </div>
-        <div id="chatbot-input-container">
-            <input type="text" id="chatbot-input" placeholder="உங்கள் கேள்வியை இங்கே தட்டச்சு செய்யவும்..." onkeydown="handleChatbotInput(event)">
-            <button id="chatbot-send" onclick="sendMessage()">▶</button>
-        </div>
+        <div id="chatbot-header">Grok AI – உங்கள் தொழில் வழிகாட்டி</div>
+        <iframe id="grok-iframe" src="https://grok.x.ai" title="Grok AI by xAI" allowfullscreen></iframe>
     </div>
 
-
     <script>
-        // --- A. Language Data Dictionary ---
         const translations = {
             'en': {
-                'page-title': 'Pathfinder - Career Guidance TN',
-                'header-title': 'Shape Your Future - Pathfinder',
-                'header-subtitle': 'Career Guidance for Students of Class 9 to 12',
+                'page-title': 'Shape Your Future - GTK Pathfinder',
+                'header-title': 'Shape Your Future - GTK Pathfinder',
+                'header-subtitle': 'Career Guidance for Students',
                 'mot-heading': 'Explore Your Potential!',
                 'mot-quote': '"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt',
                 'quiz-title': 'Assess Your Aptitude',
-                'q1': '1. Do you enjoy solving complex math problems?',
-                'q1-opt1': 'Yes',
-                'q1-opt2': 'No',
-                'q2': '2. Are you interested in writing stories, painting, or creating music?',
-                'q2-opt1': 'Yes',
-                'q2-opt2': 'No',
-                'q3': '3. Are you interested in analyzing market trends, and managing money and finance?',
-                'q3-opt1': 'Yes',
-                'q3-opt2': 'No',
+                'q1': '1. Do you enjoy solving complex math problems?', 'q1-opt1': 'Yes', 'q1-opt2': 'No',
+                'q2': '2. Interested in writing, painting, or music?', 'q2-opt1': 'Yes', 'q2-opt2': 'No',
+                'q3': '3. Interested in finance & market trends?', 'q3-opt1': 'Yes', 'q3-opt2': 'No',
                 'submit-btn': 'See Results',
                 'results-heading': 'Your Recommended Path',
-                'resources-title': 'Key Resources & Links',
-                'admissions-title': 'Admissions Guide',
-                'admissions-content': 'Application forms and schedules for entrance exams like TNEA, NEET, JEE are available here.',
-                'admissions-link': 'Learn More',
-                'scholarship-title': 'Scholarship Opportunities',
-                'scholarship-content': 'Links for First Graduate Scholarship, educational loan schemes.',
-                'scholarship-link': 'Apply Now',
-                'stream-sci-math': 'Science/Engineering (B.E./B.Tech/B.Sc)',
-                'stream-arts-hum': 'Arts & Humanities (B.A./B.Sc/Law)',
-                'stream-commerce': 'Commerce/Finance (B.Com/CA/BBA)',
-                'suggested-stream': 'Take the assessment above',
-                'initial-bot-message': 'Hello! Ask me any question about career options, courses in Tamil Nadu, or entrance exams!',
-                'chatbot-header': 'Ask a Career Expert',
-                'chatbot-input-placeholder': 'Type your question here...'
+                'stream-sci-math': 'Science & Engineering',
+                'stream-arts-hum': 'Arts & Humanities',
+                'stream-commerce': 'Commerce & Finance',
+                'chatbot-header': 'Grok AI – Career Expert'
             },
             'ta': {
-                'page-title': 'உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder',
-                'header-title': 'உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder',
-                'header-subtitle': '9 முதல் 12 ஆம் வகுப்பு மாணவர்களுக்கான தொழில் வழிகாட்டி',
+                'page-title': 'உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - GTK Pathfinder',
+                'header-title': 'உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - GTK Pathfinder',
+                'header-subtitle': 'மாணவர்களுக்கான தொழில் வழிகாட்டி',
                 'mot-heading': 'உங்கள் திறனை ஆராயுங்கள்!',
                 'mot-quote': '"எதிர்காலம் என்பது, அவர்களின் கனவுகளின் அழகை நம்புபவர்களுக்குச் சொந்தமானது." - எலினோர் ரூஸ்வெல்ட்',
                 'quiz-title': 'உங்கள் நாட்டத்தை மதிப்பிடுங்கள்',
-                'q1': '1. சிக்கலான கணிதப் பிரச்சனைகளைத் தீர்ப்பதில் நீங்கள் மகிழ்ச்சி அடைகிறீர்களா?',
-                'q1-opt1': 'ஆம்',
-                'q1-opt2': 'இல்லை',
-                'q2': '2. கதை எழுதுவது, ஓவியம் வரைவது அல்லது இசை உருவாக்குவதில் நீங்கள் ஆர்வம் உள்ளவரா?',
-                'q2-opt1': 'ஆம்',
-                'q2-opt2': 'இல்லை',
-                'q3': '3. சந்தை போக்குகளைப் பற்றி பகுப்பாய்வு செய்வதிலும், பணம் மற்றும் நிதி மேலாண்மையிலும் நீங்கள் ஆர்வம் உள்ளவரா?',
-                'q3-opt1': 'ஆம்',
-                'q3-opt2': 'இல்லை',
+                'q1': '1. சிக்கலான கணிதப் பிரச்சனைகளைத் தீர்ப்பதில் மகிழ்ச்சி அடைகிறீர்களா?', 'q1-opt1': 'ஆம்', 'q1-opt2': 'இல்லை',
+                'q2': '2. கதை, ஓவியம், இசை போன்றவற்றில் ஆர்வம் உள்ளதா?', 'q2-opt1': 'ஆம்', 'q2-opt2': 'இல்லை',
+                'q3': '3. நிதி, சந்தை பகுப்பாய்வு போன்றவற்றில் ஆர்வம் உள்ளதா?', 'q3-opt1': 'ஆம்', 'q3-opt2': 'இல்லை',
                 'submit-btn': 'முடிவுகளைப் பார்க்கவும்',
                 'results-heading': 'உங்கள் பரிந்துரைக்கப்பட்ட பாதை',
-                'resources-title': 'முக்கிய ஆதாரங்கள் மற்றும் இணைப்புகள்',
-                'admissions-title': 'சேர்க்கை வழிகாட்டி',
-                'admissions-content': 'TNEA, NEET, JEE போன்ற நுழைவுத் தேர்வுகளுக்கான விண்ணப்பப் படிவங்கள் மற்றும் கால அட்டவணைகள் இங்கே கிடைக்கும்.',
-                'admissions-link': 'மேலும் அறிக',
-                'scholarship-title': 'உதவித்தொகை வாய்ப்புகள்',
-                'scholarship-content': 'முதல் பட்டதாரி உதவித்தொகை, கல்வி கடன் திட்டங்களுக்கான இணைப்புகள்.',
-                'scholarship-link': 'விண்ணப்பிக்கவும்',
-                'stream-sci-math': 'அறிவியல்/பொறியியல் (B.E./B.Tech/B.Sc)',
-                'stream-arts-hum': 'கலை மற்றும் மனிதநேயம் (B.A./B.Sc/சட்டம்)',
-                'stream-commerce': 'வர்த்தகம்/நிதி (B.Com/CA/BBA)',
-                'suggested-stream': 'உங்கள் நாட்டத்தை மதிப்பிடுங்கள் (மேலே உள்ள தேர்வை எடுங்கள்)',
-                'initial-bot-message': 'வணக்கம்! தொழில் வாய்ப்புகள், தமிழ்நாட்டில் உள்ள படிப்புகள் அல்லது நுழைவுத் தேர்வுகள் குறித்து ஏதேனும் கேள்விகள் இருந்தால் என்னிடம் கேட்கலாம்!',
-                'chatbot-header': 'ஒரு தொழில் வழிகாட்டியிடம் கேளுங்கள்',
-                'chatbot-input-placeholder': 'உங்கள் கேள்வியை இங்கே தட்டச்சு செய்யவும்...'
+                'stream-sci-math': 'அறிவியல் & பொறியியல்',
+                'stream-arts-hum': 'கலை & மனிதநேயம்',
+                'stream-commerce': 'வர்த்தகம் & நிதி',
+                'chatbot-header': 'Grok AI – உங்கள் தொழில் வழிகாட்டி'
             }
         };
 
-        let currentLang = 'ta'; // Default to Tamil
+        let currentLang = 'ta';
 
-        // --- B. Language Switching Function ---
         function setLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
-
-            // 1. Update standard text elements
             for (const key in t) {
-                const element = document.getElementById(key);
-                if (element && key !== 'initial-bot-message' && key !== 'chatbot-input-placeholder') {
-                    element.textContent = t[key];
-                }
+                const el = document.getElementById(key);
+                if (el) el.textContent = t[key];
             }
-
-            // 2. Update placeholders and chat elements
-            document.getElementById('chatbot-input').placeholder = t['chatbot-input-placeholder'];
             document.getElementById('chatbot-header').textContent = t['chatbot-header'];
-            document.getElementById('initial-bot-message').textContent = t['initial-bot-message'];
-
-            // 3. Update the stream text if results are already shown
-            const streamDiv = document.getElementById('suggested-stream');
-            if (streamDiv.dataset.stream) {
-                displayResults(streamDiv.dataset.stream);
-            }
-            
-            // 4. Update page title
             document.getElementById('page-title').textContent = t['page-title'];
         }
 
-        // Set initial language on load
-        document.addEventListener('DOMContentLoaded', () => {
-            setLanguage(currentLang);
-        });
-
-
-        // --- C. Quiz Logic Function ---
         function submitQuiz() {
             const form = document.getElementById('aptitude-quiz');
-            const quizData = new FormData(form);
-            const answers = { 'sci-math': 0, 'arts-hum': 0, 'commerce': 0 };
+            const data = new FormData(form);
+            const scores = { 'sci-math':0, 'arts-hum':0, 'commerce':0 };
 
-            // Check if all required questions are answered
-            let allAnswered = true;
-            for (let i = 1; i <= 3; i++) {
-                if (!quizData.get('q' + i)) {
-                    allAnswered = false;
-                    break;
-                }
-            }
+            for (let val of data.values()) scores[val]++;
 
-            if (!allAnswered) {
-                alert(currentLang === 'ta' ? 'அனைத்து கேள்விகளுக்கும் பதிலளிக்கவும்.' : 'Please answer all questions.');
-                return;
-            }
+            let max = 0, stream = 'arts-hum';
+            for (let s in scores) if (scores[s] > max) { max = scores[s]; stream = s; }
 
-            // Simple Scoring Mechanism
-            for (const [name, value] of quizData.entries()) {
-                if (answers.hasOwnProperty(value)) {
-                    answers[value]++;
-                }
-            }
-
-            // Determine the highest score
-            let maxScore = -1;
-            let suggestedStream = 'arts-hum'; // Default stream
-
-            for (const stream in answers) {
-                if (answers[stream] > maxScore) {
-                    maxScore = answers[stream];
-                    suggestedStream = stream;
-                }
-            }
-            
-            displayResults(suggestedStream);
-            // Scroll to results section
-            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('suggested-stream').textContent = translations[currentLang]['stream-' + stream];
         }
 
-        // --- D. Dynamic Results & Resources Display ---
-        function displayResults(streamKey) {
-            const resultsDiv = document.getElementById('suggested-stream');
-            const linksList = document.getElementById('resource-links');
-            const t = translations[currentLang];
-            
-            const streamNameKey = 'stream-' + streamKey;
-            resultsDiv.textContent = t[streamNameKey] || streamKey;
-            resultsDiv.dataset.stream = streamKey; // Store the key for language toggle
-
-            linksList.innerHTML = ''; // Clear previous links
-
-            // Define Resources based on the suggested stream
-            let resources = [];
-            let admissionsLink = 'https://www.tneaonline.org/'; // Default admission link
-            let scholarshipLink = 'https://www.tnesc.in/'; // Default scholarship link
-
-            if (streamKey === 'sci-math') { // Science/Engineering
-                resources = [
-                    { text: 'TNEA Counselling Official Website (Engineering)', href: 'https://www.tneaonline.org/' },
-                    { text: 'NEET Official Site (Medical/Health Science)', href: 'https://neet.nta.nic.in/' },
-                    { text: 'Tamil Nadu BSc Agriculture Admissions', href: 'https://tnau.ac.in/' }
-                ];
-                admissionsLink = 'https://www.tneaonline.org/';
-            } else if (streamKey === 'commerce') { // Commerce/Finance
-                resources = [
-                    { text: 'The Institute of Chartered Accountants of India (ICAI)', href: 'https://www.icai.org/' },
-                    { text: 'List of Top B.Com Colleges in Chennai', href: '#' },
-                    { text: 'National Stock Exchange (NSE) Courses', href: '#' }
-                ];
-                admissionsLink = '#';
-            } else if (streamKey === 'arts-hum') { // Arts & Humanities/Law
-                 resources = [
-                    { text: 'Tamil Nadu Dr. Ambedkar Law University Admissions', href: 'https://tndalu.ac.in/' },
-                    { text: 'UPSC/TNPSC Exam Guidance Resources', href: '#' },
-                    { text: 'List of Top Arts & Science Colleges in Tamil Nadu', href: '#' }
-                ];
-                admissionsLink = 'https://tndalu.ac.in/';
+        // Chatbot toggle (இப்போது Grok AI)
+        document.getElementById('chatbot-toggle').onclick = () => {
+            const box = document.getElementById('chatbot-box');
+            if (box.style.display === 'flex') {
+                box.style.display = 'none';
+                document.getElementById('chatbot-toggle').textContent = 'AI';
+            } else {
+                box.style.display = 'flex';
+                document.getElementById('chatbot-toggle').textContent = 'X';
             }
-            
-            // Update admission and scholarship links
-            document.getElementById('admissions-link').href = admissionsLink;
-            document.getElementById('scholarship-link').href = scholarshipLink;
-
-            // Populate the resource list
-            resources.forEach(res => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = res.href;
-                link.target = "_blank";
-                link.textContent = res.text;
-                listItem.appendChild(link);
-                linksList.appendChild(listItem);
-            });
-        }
-
-
-        // --- E. Chatbot Logic (Rule-Based AI) ---
-
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const chatbotBox = document.getElementById('chatbot-box');
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInput = document.getElementById('chatbot-input');
-
-        chatbotToggle.onclick = () => {
-            const isVisible = chatbotBox.style.display === 'flex';
-            chatbotBox.style.display = isVisible ? 'none' : 'flex';
-            chatbotToggle.textContent = isVisible ? '💬' : '✖';
         };
 
-        function addMessage(text, sender) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-            messageElement.textContent = text;
-            chatbotMessages.appendChild(messageElement);
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to bottom
-        }
-
-        function handleChatbotInput(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const message = chatbotInput.value.trim();
-            if (message === '') return;
-
-            addMessage(message, 'user');
-            chatbotInput.value = '';
-
-            // Simulate AI delay
-            setTimeout(() => {
-                const response = generateAIResponse(message);
-                addMessage(response, 'bot');
-            }, 1000); // 1 second delay
-        }
-
-        // The core of the "Free Open Source AI" (Rule-Based Logic)
-        function generateAIResponse(userInput) {
-            const inputLower = userInput.toLowerCase();
-            const lang = currentLang;
-            const t = translations[lang];
-
-            // 1. Keyword-based responses (Career Stream)
-            if (inputLower.includes('engineering') || inputLower.includes('பொறியியல்')) {
-                return lang === 'ta' 
-                    ? `பொறியியல் துறையில், CSE (கணினி அறிவியல்), ECE (எலக்ட்ரானிக்ஸ்) மற்றும் மெக்கானிக்கல் போன்ற பல்வேறு பிரிவுகள் உள்ளன. TNEA (தமிழ்நாடு பொறியியல் சேர்க்கை) மூலம் சேர்க்கை பெறலாம். நீங்கள் கணிதத்தில் கவனம் செலுத்த வேண்டும்.`
-                    : `In Engineering, you have branches like CSE, ECE, Mechanical, and more. Admission is primarily through TNEA (Tamil Nadu Engineering Admissions). Focus on Math and Science subjects.`;
-            }
-            
-            if (inputLower.includes('neet') || inputLower.includes('medical') || inputLower.includes('மருத்துவம்')) {
-                return lang === 'ta' 
-                    ? `மருத்துவப் படிப்புகளுக்கு (MBBS/BDS) தேசிய தகுதி மற்றும் நுழைவுத் தேர்வு (NEET) கட்டாயம். நீங்கள் உயிரியல் மற்றும் வேதியியல் பிரிவுகளில் அதிக மதிப்பெண்களை இலக்காகக் கொள்ள வேண்டும்.`
-                    : `For Medical courses (MBBS/BDS), the National Eligibility cum Entrance Test (NEET) is mandatory. You must focus on scoring high in Biology and Chemistry.`;
-            }
-
-            if (inputLower.includes('commerce') || inputLower.includes('b.com') || inputLower.includes('வர்த்தகம்')) {
-                return lang === 'ta'
-                    ? `B.Com படிப்புகள் நிதி, கணக்கியல் மற்றும் வணிக நிர்வாகத்தில் கவனம் செலுத்துகின்றன. CA (பட்டயக் கணக்காளர்) போன்ற தொழில்களுக்கு இது ஒரு நல்ல தொடக்கமாகும். மாநிலக் கல்லூரி சேர்க்கைக்கு 12ஆம் வகுப்பு மதிப்பெண்கள் போதும்.`
-                    : `B.Com courses focus on finance, accounting, and business management. It's a great start for careers like CA (Chartered Accountant). 12th board marks are usually sufficient for state college admissions.`;
-            }
-
-            // 2. Simple greeting and general questions
-            if (inputLower.includes('hello') || inputLower.includes('hi') || inputLower.includes('வணக்கம்')) {
-                return lang === 'ta' 
-                    ? `வணக்கம்! நான் ஒரு தொழில் வழிகாட்டி நிபுணர். உங்களுக்கு எப்படி உதவ முடியும்?`
-                    : `Hello! I am a career guidance expert. How can I help you today?`;
-            }
-            
-            if (inputLower.includes('scholarship') || inputLower.includes('உதவித்தொகை')) {
-                return lang === 'ta' 
-                    ? `தமிழ்நாட்டில் முதல் பட்டதாரி உதவித்தொகை (First Graduate Scholarship) மற்றும் மத்திய அரசின் பல்வேறு உதவித்தொகை திட்டங்கள் உள்ளன. மேலும் விவரங்களுக்கு மேலே உள்ள 'உதவித்தொகை வாய்ப்புகள்' பகுதியைச் சரிபார்க்கவும்.`
-                    : `Tamil Nadu offers the First Graduate Scholarship and various Central Government schemes. Please check the 'Scholarship Opportunities' section above for links.`;
-            }
-
-            // 3. Default/Fallback response
-            return lang === 'ta'
-                ? `நான் ஒரு அடிப்படை மென்பொருள் வழிகாட்டி. நீங்கள் கேட்கும் கேள்விக்கு சரியான பதில் இல்லை. தயவுசெய்து 'பொறியியல்', 'மருத்துவம்' அல்லது 'B.Com' போன்ற முக்கிய வார்த்தைகளைப் பயன்படுத்தி மீண்டும் முயற்சிக்கவும்.`
-                : `I am a basic rule-based guide. I don't have a specific answer for that. Please try again with keywords like 'Engineering', 'NEET', or 'B.Com'.`;
-        }
+        // முதலில் தமிழில் தொடங்கு
+        setLanguage('ta');
     </script>
-
 </body>
 </html>
