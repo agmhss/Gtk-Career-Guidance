@@ -1,1093 +1,664 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTK Career Guide</title>
-    <script src="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></script>
+    <title id="page-title">உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
-        
-        :root {
-            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-bg: rgba(255,255,255,0.95);
-            --accent-green: #4CAF50;
-            --accent-purple: #9C27B0;
-            --accent-blue: #03A9F4;
-            --accent-orange: #FF9800;
-            --text-muted: #666;
-            --radius: 25px;
-        }
-        
-        * {
+        /* --- 1. General Styling --- */
+        body {
+            font-family: 'Noto Sans Tamil', 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 28px;
-            box-shadow: 0 15px 35px rgba(3,169,244,0.4);
-            text-align: center;
-            line-height: 1.2;
+            background-color: #f4f7f6; /* Light background */
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
-        
-        .brand-title h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, #fff, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- 2. Header & Hero Section --- */
+        .hero-section {
+            background: linear-gradient(135deg, #007bff, #00c6ff); /* Vibrant blue gradient */
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;
             margin-bottom: 5px;
         }
-        
-        .brand-title p {
-            color: rgba(255,255,255,0.95);
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-        
-        .lang-toggle {
-            display: flex;
-            gap: 10px;
-            background: rgba(255,255,255,0.2);
-            padding: 12px;
-            border-radius: 50px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-        
-        .lang-btn {
-            padding: 14px 24px;
+
+        /* Language Selector */
+        .lang-selector button {
+            background-color: #ffc107; /* Yellow accent */
             border: none;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 8px 15px;
+            margin: 5px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
         }
-        
-        .lang-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+
+        .lang-selector button:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
         }
-        
-        .lang-btn:hover::before {
-            left: 100%;
-        }
-        
-        .lang-btn.active {
-            background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
+
+        /* --- 3. Motivation Card --- */
+        .motivation-card {
+            background-color: #28a745; /* Inspiring Green */
             color: white;
-            box-shadow: 0 12px 40px rgba(76,175,80,0.5);
-            transform: translateY(-2px) scale(1.05);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Main Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 30px;
+
+        /* --- 4. Quiz Section & Cards --- */
+        .quiz-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
             margin-bottom: 30px;
         }
-        
-        @media (max-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-        }
-        
-        /* Chat Section */
-        .chat-section {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 35px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            height: 700px;
-            display: flex;
-            flex-direction: column;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-        
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-        
-        .section-title h2 {
-            font-size: 1.6rem;
-            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-        }
-        
-        .section-title .icon {
-            font-size: 1.8rem;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 10px;
-            margin-bottom: 25px;
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTK Career Guide – AI + Quiz</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
 
-        :root {
-            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-bg: rgba(255,255,255,0.96);
-            --accent-green: #4CAF50;
-            --accent-purple: #9C27B0;
-            --accent-blue: #03A9F4;
-            --accent-orange: #FF9800;
-            --text-muted: #666;
-            --radius: 24px;
+        .quiz-section h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; }
-
-        body{
-            font-family:'Poppins','Noto Sans Tamil',sans-serif;
-            background:var(--bg-primary);
-            min-height:100vh;
-            color:#222;
+        .question-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 5px solid #ffc107; /* Yellow marker */
+            margin-bottom: 15px;
+            border-radius: 5px;
         }
 
-        .container{
-            max-width:1100px;
-            margin:0 auto;
-            padding:16px;
-            min-height:100vh;
-            display:flex;
-            flex-direction:column;
-            gap:16px;
+        .question-card label {
+            display: block;
+            cursor: pointer;
+            padding: 5px 0;
         }
 
-        header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:16px;
-            flex-wrap:wrap;
+        /* Interactive Buttons */
+        #submit-btn {
+            background-color: #dc3545; /* Red/Maroon for action */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
         }
 
-        .brand{
-            display:flex;
-            gap:14px;
-            align-items:center;
+        #submit-btn:hover {
+            background-color: #c82333;
         }
 
-        .logo{
-            width:60px;
-            height:60px;
-            border-radius:18px;
-            background:linear-gradient(135deg,#03A9F4,#9C27B0);
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            color:white;
-            font-weight:700;
-            font-size:18px;
-            box-shadow:0 10px 28px rgba(0,0,0,0.25);
+        /* --- 5. Results Section --- */
+        .results-section {
+            margin-top: 40px;
         }
 
-        .brand-title h1{
-            margin:0;
-            font-size:20px;
-            color:#fff;
+        .stream-result {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
         }
 
-        .brand-title p{
-            margin:0;
-            font-size:13px;
-            color:rgba(255,255,255,0.9);
-        }
-
-        .lang-toggle{
-            display:flex;
-            gap:8px;
-            background:rgba(255,255,255,0.22);
-            padding:6px;
-            border-radius:999px;
-            backdrop-filter:blur(14px);
-        }
-
-        .lang-btn{
-            border:none;
-            background:transparent;
-            padding:8px 14px;
-            border-radius:999px;
-            color:#f5f5f5;
-            font-size:13px;
-            font-weight:600;
-            cursor:pointer;
-            transition:0.25s;
-        }
-
-        .lang-btn.active{
-            background:#fff;
-            color:#333;
-            box-shadow:0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .main-grid{
-            display:grid;
-            grid-template-columns:1.1fr 0.9fr;
-            gap:16px;
-        }
-
-        @media(max-width:900px){
-            .main-grid{ grid-template-columns:1fr; }
-        }
-
-        /* Chat section */
-        .chat-section{
-            background:var(--card-bg);
-            border-radius:var(--radius);
-            padding:18px;
-            box-shadow:0 14px 32px rgba(0,0,0,0.18);
-            display:flex;
-            flex-direction:column;
-            height:520px;
-        }
-
-        .section-title{
-            display:flex;
-            align-items:center;
-            gap:8px;
-            margin-bottom:8px;
-        }
-
-        .section-title h2{
-            font-size:16px;
-            margin:0;
-            color:#4b4b4b;
-        }
-
-        .chat-messages{
-            flex:1;
-            margin-top:6px;
-            padding-right:6px;
-            overflow-y:auto;
-        }
-
-        .message{
-            max-width:80%;
-            padding:10px 14px;
-            border-radius:18px;
-            margin-bottom:10px;
-            font-size:13px;
-            line-height:1.4;
-        }
-
-        .ai-message{
-            background:linear-gradient(135deg,#43e97b,#38f9d7);
-            margin-right:auto;
-        }
-
-        .user-message{
-            background:linear-gradient(135deg,#4facfe,#00f2fe);
-            color:#fff;
-            margin-left:auto;
-        }
-
-        .typing-indicator{
-            display:none;
-            font-size:12px;
-            color:var(--text-muted);
-            margin-bottom:6px;
-        }
-
-        .input-row{
-            display:flex;
-            gap:8px;
-            margin-top:8px;
-        }
-
-        #userInput{
-            flex:1;
-            border-radius:999px;
-            border:none;
-            padding:10px 14px;
-            font-size:13px;
-            outline:none;
-            background:#f1f3fb;
-        }
-
-        #sendBtn{
-            border:none;
-            border-radius:999px;
-            padding:10px 18px;
-            background:linear-gradient(135deg,#ff6b6b,#ff8e8e);
-            color:#fff;
-            font-size:13px;
-            font-weight:600;
-            cursor:pointer;
-        }
-
-        .quick-buttons{
-            display:flex;
-            flex-wrap:wrap;
-            gap:6px;
-            margin-top:10px;
-        }
-
-        .quick-btn{
-            border:none;
-            border-radius:999px;
-            padding:7px 10px;
-            background:linear-gradient(135deg,#a8edea,#fed6e3);
-            font-size:11px;
-            cursor:pointer;
-        }
-
-        /* Quiz section */
-        .quiz-card{
-            background:var(--card-bg);
-            border-radius:var(--radius);
-            padding:16px;
-            box-shadow:0 14px 32px rgba(0,0,0,0.18);
-            display:flex;
-            flex-direction:column;
-            height:520px;
-            }            scrollbar-width: thin;
-            scrollbar-color: rgba(3,169,244,0.3) transparent;
-        }
-        
-        .chat-messages::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .chat-messages::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(3,169,244,0.3);
+        .admissions-card, .scholarship-card {
+            background-color: white;
             border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #17a2b8; /* Cyan for info */
+        }
+
+        .admissions-card a, .scholarship-card a {
+            display: inline-block;
+            background-color: #17a2b8;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
         }
         
+        .admissions-card a:hover, .scholarship-card a:hover {
+            background-color: #117a8b;
+        }
+
+        #resource-links {
+            list-style: none;
+            padding: 0;
+        }
+        #resource-links li {
+            background-color: #e8f5e9; /* Very light green */
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #resource-links li a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* --- 6. Floating Chatbot Dialogue Box --- */
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #ff6f00; /* Orange/Motivational Color */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        #chatbot-toggle:hover {
+            background-color: #e65100;
+            transform: scale(1.1);
+        }
+
+        #chatbot-box {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            border: 2px solid #ff6f00;
+        }
+
+        #chatbot-header {
+            background-color: #ff6f00;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #chatbot-messages {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f0f4f7;
+        }
+
         .message {
-            margin-bottom: 22px;
-            padding: 18px 24px;
-            border-radius: 25px;
-            max-width: 85%;
-            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            line-height: 1.6;
-             /* Quiz section */
-        .quiz-card{
-            background:var(--card-bg);
-            border-radius:var(--radius);
-            padding:16px;
-            box-shadow:0 14px 32px rgba(0,0,0,0.18);
-            display:flex;
-            flex-direction:column;
-            height:520px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+            line-height: 1.4;
         }
 
-        .quiz-questions{
-            flex:1;
-            overflow-y:auto;
-            margin-top:6px;
-            padding-right:6px;
-            font-size:13px;
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            margin-left: auto;
+            text-align: right;
         }
 
-        .question{
-            border-radius:14px;
-            border:1px solid #e3ebff;
-            padding:10px 10px 8px;
-            margin-bottom:8px;
-            background:linear-gradient(180deg,#ffffff,#f7fbff);
+        .bot-message {
+            background-color: #e9ecef;
+            color: #333;
+            margin-right: auto;
+            text-align: left;
         }
 
-        .question p{
-            margin:0 0 6px 0;
-            font-weight:600;
+        #chatbot-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
         }
 
-        .options{
-            display:flex;
-            gap:6px;
-            flex-wrap:wrap;
+        #chatbot-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
         }
 
-        .option{
-            border-radius:999px;
-            border:1px solid #dfe7ff;
-            padding:6px 9px;
-            font-size:11px;
-            cursor:pointer;
-            background:#fff;
+        #chatbot-send {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
 
-        .option.selected{
-            background:linear-gradient(135deg,#4CAF50,#03A9F4);
-            color:#fff;
-            border:none;
+        #chatbot-send:hover {
+            background-color: #0056b3;
         }
 
-        .quiz-actions{
-            display:flex;
-            gap:8px;
-            margin-top:8px;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #eee;
+            color: #555;
+            font-size: 0.9em;
         }
-
-        .btn{
-            flex:1;
-            border-radius:999px;
-            border:none;
-            padding:9px 0;
-            font-size:13px;
-            font-weight:600;
-            cursor:pointer;
-        }
-
-        .btn-primary{
-            background:linear-gradient(135deg,#9C27B0,#03A9F4);
-            color:#fff;
-        }
-
-        .btn-secondary{
-            background:transparent;
-            color:#03A9F4;
-            border:1px solid #03A9F4;
-        }
-
-        .result{
-            margin-top:8px;
-            border-radius:14px;
-            border:1px solid #c8f3d6;
-            background:linear-gradient(180deg,#f7fff9,#ffffff);
-            padding:10px 12px;
-            font-size:12px;
-        }
-
-        .small-muted{ font-size:11px;color:var(--text-muted); }
     </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <div class="brand">
-            <div class="logo">AI<br>CG</div>
-            <div class="brand-title">
-                <h1 id="brand-title">GTK Career Guide</h1>
-                <p id="brand-sub">Tamil Nadu Courses · Jobs · Admissions · Scholarships</p>
-            </div>
-        </div>
-        <div class="lang-toggle">
-            <button id="lang-en" class="lang-btn active">🇬🇧 English</button>
-            <button id="lang-ta" class="lang-btn">🇮🇳 தமிழ்</button>
+
+    <header class="hero-section">
+        <h1 id="header-title">உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder</h1>
+        <p id="header-subtitle">GTK மாணவர்களுக்கான தொழில் வழிகாட்டி</p>
+        <div class="lang-selector">
+            <button id="lang-en" onclick="setLanguage('en')">English</button>
+            <button id="lang-ta" onclick="setLanguage('ta')">தமிழ்</button>
         </div>
     </header>
 
-    <div class="main-grid">
-        <!-- CHAT -->
-        <section class="chat-section">
-            <div class="section-title">
-                <h2 id="chat-title">AI Career Assistant</h2>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message ai-message" id="welcome-msg">
-                    வணக்கம்! 👋 TNEA, TNPSC, படிப்புத் தவி, மருத்துவச் சேர்க்கை பற்றி கேளுங்கள். கீழே உள்ள Quiz மூலம் உங்களுக்கு ஏற்ற துறையைவும் அறியலாம்.
+    <main class="container">
+        <section class="motivation-card">
+            <h2 id="mot-heading">உங்கள் திறனை ஆராயுங்கள்! (Explore Your Potential!)</h2>
+            <p id="mot-quote">"எதிர்காலம் என்பது, அவர்களின் கனவுகளின் அழகை நம்புபவர்களுக்குச் சொந்தமானது." - எலினோர் ரூஸ்வெல்ட்</p>
+        </section>
+
+        <section class="quiz-section">
+            <h2 id="quiz-title">உங்கள் நாட்டத்தை மதிப்பிடுங்கள் (Aptitude Assessment)</h2>
+            <form id="aptitude-quiz">
+                <div class="question-card">
+                    <p id="q1">1. சிக்கலான கணிதப் பிரச்சனைகளைத் தீர்ப்பதில் நீங்கள் மகிழ்ச்சி அடைகிறீர்களா? (Do you enjoy solving complex math problems?)</p>
+                    <label><input type="radio" name="q1" value="sci-math" required> <span id="q1-opt1">ஆம் (Yes)</span></label><br>
+                    <label><input type="radio" name="q1" value="arts-hum"> <span id="q1-opt2">இல்லை (No)</span></label>
                 </div>
-            </div>
-            <div class="typing-indicator" id="typingIndicator">AI சிந்திக்கிறது…</div>
-            <div class="input-row">
-                <input id="userInput" type="text" placeholder="TNPSC jobs, TNEA counselling, NEET medical seats...">
-                <button id="sendBtn">Send</button>
-            </div>
-            <div class="quick-buttons" id="quickButtons"></div>
-        </section>
-
-        <!-- QUIZ -->
-        <section class="quiz-card">
-            <div class="section-title">
-                <h2 id="quiz-title">Career Interest Quiz</h2>
-            </div>
-            <p class="small-muted" id="quiz-desc">10 quick questions to discover your perfect career path (Tamil Nadu focus).</p>
-
-            <div class="quiz-questions" id="quiz"></div>
-
-            <div class="quiz-actions">
-                <button class="btn btn-primary" id="submit-quiz">See results</button>
-                <button class="btn btn-secondary" id="reset-quiz">Reset quiz</button>
-            </div>
-
-            <div id="result-area" style="display:none">
-                <div class="result" id="result-box"></div>
-            </div>
-        </section>
-    </div>
-</div>
-
-<script>
-/* TEXT DATA */
-const STR = {
-    en:{
-        brandTitle:'GTK Career Guide',
-        brandSub:'Tamil Nadu Courses · Jobs · Admissions · Scholarships',
-        chatTitle:'AI Career Assistant',
-        welcomeMsg:'Hi! 👋 Ask about TNEA counselling, TNPSC jobs, scholarships, NEET medical seats, etc. Use the quiz on the right to discover suitable streams.',
-        quizTitle:'Career Interest Quiz',
-        quizDesc:'Answer these 10 short questions. There are no right or wrong answers – it just finds what suits you.',
-        sendText:'Send',
-        typing:'AI is thinking…',
-        quick:['TNEA 2025 counselling','TNPSC Group 4 jobs','Anna University CSE cutoff','Tamil Nadu scholarships','NEET 2025 MBBS cut off','Polytechnic after 10th'],
-        questions:[
-            {q:'Do you enjoy solving math or logical puzzles?',a:['Yes – I love numbers','Sometimes','Not really']},
-            {q:'Do you like working with plants or animals?',a:['Yes','A little','Not at all']},
-            {q:'Do you enjoy reading or writing about people and society?',a:['Yes','Sometimes','No']},
-            {q:'Are you interested in drawing, design or creative arts?',a:['Very interested','Somewhat','Not interested']},
-            {q:'Do you like building or repairing machines/devices?',a:['Love it','Sometimes','No']},
-            {q:'Do you enjoy teaching, helping others or social work?',a:['Yes','A bit','No']},
-            {q:'Do you like computers, coding or technology?',a:['Yes','A little','Not really']},
-            {q:'Do you prefer a steady government job?',a:['Yes','Maybe later','No']},
-            {q:'Are you interested in business, sales or starting a small enterprise?',a:['Yes','Maybe','No']},
-            {q:'Do you enjoy lab work and experiments?',a:['Yes','Sometimes','No']}
-        ]
-    },
-    ta:{
-        brandTitle:'GTK Career Guide',
-        brandSub:'தமிழ்நாடு · படிப்புகள் · வேலைகள் · சேர்க்கை · படிப்புத் தவி',
-        chatTitle:'AI தொழில் உதவியாளர்',
-        welcomeMsg:'வணக்கம்! 👋 TNEA, TNPSC, படிப்புத் தவி, NEET மருத்துவச் சேர்க்கை பற்றி கேளுங்கள். வலது பக்கம் உள்ள Quiz மூலம் உங்களுக்கு ஏற்ற துறையை கண்டறியலாம்.',
-        quizTitle:'தொழில் ஆர்வ Quiz',
-        quizDesc:'10 குறுகிய கேள்விகளுக்கு பதில் அளியுங்கள். சரி/தவறு எதுவும் இல்லை – உங்களுக்கு பொருத்தமான துறையை காட்டும்.',
-        sendText:'அனுப்பு',
-        typing:'AI சிந்திக்கிறது…',
-        quick:['TNEA 2025 கவுன்சலிங்','TNPSC Group 4 வேலைகள்','அண்ணா பல்கலை CSE cutoff','தமிழ்நாடு படிப்புத் தவி','NEET 2025 MBBS cutoff','10ஆம் பிறகு பாலிடெக்னிக்'],
-        questions:[
-            {q:'எண்கள்/மறுபதிவுகள் போன்ற புதிர்களைத் தீர்க்க விருப்பமா?',a:['ஆம் – மிகவும் பிடிக்கும்','சில நேரம்','பிடிக்காது']},
-            {q:'செடிகள்/விலங்குகளுடன் வேலை செய்ய விருப்பமா?',a:['ஆம்','சற்றே','மொத்தமும் இல்லை']},
-            {q:'மக்கள் மற்றும் சமூகத்தைப் பற்றி வாசிக்க/எழுத பிடிக்குமா?',a:['ஆம்','சில நேரம்','இல்லை']},
-            {q:'வரைதல், டிசைன், படைப்பாற்றல் பணிகளில் ஆர்வமா?',a:['மிகவும்','சில அளவு','இல்லை']},
-            {q:'யந்திரங்களை உருவாக்கவும் சரி செய்யவும் விருப்பமா?',a:['பிடிக்கும்','சில சமயம்','இல்லை']},
-            {q:'கற்பித்தல், பிறருக்கு உதவி அல்லது சமூகப் பணியில் ஆர்வமா?',a:['ஆம்','சிறிது','இல்லை']},
-            {q:'கணினி, நிரலாக்கம் அல்லது தொழில்நுட்பம் பிடிக்குமா?',a:['ஆம்','சற்றே','இல்லை']},
-            {q:'நிலையான அரசு வேலை வேண்டுமா?',a:['ஆம்','பார்க்கலாம்','இல்லை']},
-            {q:'வணிகம், விற்பனை அல்லது சிறு தொழில் ஆரம்பிக்க விருப்பமா?',a:['ஆம்','முடியும்','இல்லை']},
-            {q:'ஆய்வக வேலை மற்றும் பரிசோதனைகள் பிடிக்குமா?',a:['ஆம்','சில நேரம்','இல்லை']}
-        ]
-    }
-};
-
-let LANG='ta';       // default Tamil like in screenshot
-let answers=new Array(10).fill(null);
-
-/* QUIZ BUCKETS */
-const BUCKET_NAMES={
-    en:{R:'Engineering/Technical',I:'Medical/Science',A:'Creative/Design',S:'Teaching/Social',E:'Business/Management',C:'Government/Admin'},
-    ta:{R:'பொறியியல்/தொழில்நுட்பம்',I:'மருத்துவம்/அறிவியல்',A:'படைப்பு/டிசைன்',S:'கற்பித்தல்/சமூக சேவை',E:'வணிகம்/மேலாண்மை',C:'அரசு/நிர்வாகம்'}
-};
-const Q_MAP=[
-    ['I','C','A'],
-    ['I','S','R'],
-    ['S','A','C'],
-    ['A','S','R'],
-    ['R','I','C'],
-    ['S','A','E'],
-    ['I','C','R'],
-    ['C','E','S'],
-    ['E','C','S'],
-    ['I','R','C']
-];
-
-function $(id){return document.getElementById(id);}
-
-/* LANGUAGE RENDER */
-function applyLang(){
-    const s=STR[LANG];
-    $('brand-title').textContent=s.brandTitle;
-    $('brand-sub').textContent=s.brandSub;
-    $('chat-title').textContent=s.chatTitle;
-    $('welcome-msg').textContent=s.welcomeMsg;
-    $('quiz-title').textContent=s.quizTitle;
-    $('quiz-desc').textContent=s.quizDesc;
-    $('sendBtn').textContent=s.sendText;
-    $('typingIndicator').textContent=s.typing;
-
-    // toggle active button
-    $('lang-en').classList.toggle('active',LANG==='en');
-    $('lang-ta').classList.toggle('active',LANG==='ta');
-
-    renderQuickButtons();
-    renderQuiz();
-}
-
-/* QUIZ RENDER */
-function renderQuiz(){
-    const s=STR[LANG];
-    const container=$('quiz');
-    container.innerHTML='';
-    answers.forEach((val,i)=>{
-        const q=s.questions[i];
-        const wrap=document.createElement('div');
-        wrap.className='question';
-        const p=document.createElement('p');
-        p.textContent=(i+1)+'. '+q.q;
-        wrap.appendChild(p);
-
-        const optWrap=document.createElement('div');
-        optWrap.className='options';
-        q.a.forEach((txt,idx)=>{
-            const btn=document.createElement('div');
-            btn.className='option';
-            btn.textContent=txt;
-            if(val===idx) btn.classList.add('selected');
-            btn.onclick=()=>{
-                answers[i]=idx;
-                Array.from(optWrap.children).forEach(c=>c.classList.remove('selected'));
-                btn.classList.add('selected');
-            };
-            optWrap.appendChild(btn);
-        });
-        wrap.appendChild(optWrap);
-        container.appendChild(wrap);
-    });
-}
-    /* QUIZ RESULT */
-function showResult(){
-    const counts={R:0,I:0,A:0,S:0,E:0,C:0};
-    let answered=0;
-    answers.forEach((ans,i)=>{
-        if(ans!==null){
-            const bucket=Q_MAP[i][ans];
-            counts[bucket]++;
-            answered++;
-        }
-
-        // ========================================
-        // BILINGUAL CONTENT & STATE
-        // ========================================
-        const STR = {
-            en: {
-                brandTitle: 'TN Career Guide AI',
-                brandSub: 'Tamil Nadu Courses • Jobs • Admissions • Scholarships',
-                chatTitle: 'AI Career Assistant',
-                welcomeMsg: 'Hi! 👋 Ask me about TNEA counselling, TNPSC jobs, Anna University courses, scholarships, medical admissions, or take the career quiz!',
-                quizTitle: 'Career Interest Quiz',
-                quizDesc: 'Answer 10 quick questions to discover your best career paths (Tamil Nadu specific)',
-                submitText: 'See My Results',
-                resetText: 'Reset Quiz',
-                sendText: 'Send',
-                typingText: 'AI is thinking...',
-                quickButtons: [
-                    'TNEA 2025', 'TNPSC Group 1', 'Anna University B.E', 'TN Scholarships',
-                    'NEET Medical', 'Government Jobs', 'Polytechnic Diploma', 'TNAU Agriculture'
-                ],
-                quizQuestions: [
-                    {q: 'Do you enjoy solving math or logical puzzles?', a: ['Yes—I love numbers', 'Sometimes', 'Not really']},
-                    {q: 'Do you like working with plants/animals?', a: ['Yes', 'A little', 'Not at all']},
-                    {q: 'Do you enjoy reading/writing about people/society?', a: ['Yes', 'Sometimes', 'No']},
-                    {q: 'Are you creative—drawing, designing, arts?', a: ['Very creative', 'Somewhat', 'No']},
-                    {q: 'Do you like building/fixing machines?', a: ['Love it', 'Sometimes', 'No']},
-                    {q: 'Do you enjoy teaching/helping others?', a: ['Yes', 'A bit', 'No']},
-                    {q: 'Do you like computers/programming?', a: ['Yes', 'A little', 'Not really']},
-                    {q: 'Want steady government job?', a: ['Yes', 'Maybe later', 'No']},
-                    {q: 'Prefer business/sales/entrepreneurship?', a: ['Yes', 'Maybe', 'No']},
-                    {q: 'Enjoy lab work/experiments?', a: ['Yes', 'Sometimes', 'No']}
-                ]
-            },
-            ta: {
-                brandTitle: 'தமிழ்நாடு தொழில் வழிகாட்டி AI',
-                brandSub: 'படிப்புகள் • வேலைகள் • சேர்க்கை • படிப்பு உதவித்தொகை',
-                chatTitle: 'AI தொழில் உதவியாளர்',
-                welcomeMsg: 'வணக்கம்! 👋 TNEA கவுன்சலிங், TNPSC வேலைகள், அண்ணா பல்கலைக்கழகம், படிப்புத் தவி, மருத்துவ சேர்க்கை பற்றி கேளுங்கள்!',
-                quizTitle: 'தொழில் ஆர்வம் Quiz',
-                quizDesc: 'உங்கள் சிறந்த தொழில் பாதைகளைக் கண்டறிய 10 விரைவான கேள்விகள் (தமிழ்நாடு சிறப்பு)',
-                submitText: 'எனது முடிவுகள்',
-                resetText: 'Quiz மீட்டமை',
-                sendText: 'அனுப்பு',
-                typingText: 'AI சிந்திக்கிறது...',
-                quickButtons: [
-                    'TNEA 2025', 'TNPSC குரூப் 1', 'அண்ணா பி.இ', 'தமிழ்நாடு படிப்புத் தவி',
-                    'NEET மருத்துவம்', 'அரசு வேலைகள்', 'பாலிடெக்னிக் டிப்ளமா', 'TNAU வேளாண்மை'
-                ],
-                quizQuestions: [
-                    {q: 'எண்கள்/புதிர்களைத் தீர்க்க விரும்புகிறீர்களா?', a: ['ஆம்—எண்கள் பிடிக்கும்', 'சில நேரம்', 'இல்லை']},
-                    {q: 'செடிகள்/விலங்குகளுடன் வேலை செய்ய விரும்புகிறீர்களா?', a: ['ஆம்', 'சற்று', 'முற்றிலும் இல்லை']},
-                    {q: 'மக்கள்/சமுதாயம் பற்றி வாசிக்க/எழுத பிடிக்குமா?', a: ['ஆம்', 'சில நேரம்', 'இல்லை']},
-                    {q: 'படைப்பாற்றல்—வரைதல், வடிவமைப்பு உண்டா?', a: ['மிகவும் படைப்பு', 'சற்று', 'இல்லை']},
-                    {q: 'யந்திரங்களை உருவாக்க/சரி செய்ய விரும்புகிறீர்களா?', a: ['அதிகம் பிடிக்கும்', 'சில நேரம்', 'இல்லை']},
-                    {q: 'பிறருக்கு கற்பிக்க/உதவ விரும்புகிறீர்களா?', a: ['ஆம்', 'சற்று', 'இல்லை']},
-                    {q: 'கணினி/நிரலாக்கம் பிடிக்குமா?', a: ['ஆம்', 'சற்று', 'இல்லை']},
-                    {q: 'நிலையான அரசு வேலை வேண்டுமா?', a: ['ஆம்', 'பின்னர் பார்க்கலாம்', 'இல்லை']},
-                    {q: 'வணிகம்/விற்பனை/தொழில் தொடங்க விருப்பமா?', a: ['ஆம்', 'முடியும்', 'இல்லை']},
-                    {q: 'ஆய்வக வேலை/பரிசோதனைகள் பிடிக்குமா?', a: ['ஆம்', 'சில நேரம்', 'இல்லை']}
-                ]
-            }
-        };
-
-        let LANG = 'en';
-        let answers = Array(10).fill(null);
-
-        // Career bucket mapping (RIASEC model)
-        const BUCKET_NAMES = {
-            en: {R: 'Engineering/Technical', I: 'Medical/Science', A: 'Creative Arts', S: 'Teaching/Service', E: 'Business/Management', C: 'Government/Admin'},
-            ta: {R: 'பொறியியல்/தொழில்நுட்பம்', I: 'மருத்துவம்/அறிவியல்', A: 'படைப்புக் கலை', S: 'கற்பித்தல்/சேவை', E: 'வணிகம்/மேலாண்மை', C: 'அரசு/நிர்வாகம்'}
-        };
-
-        const Q_MAP = [
-const Q_MAP = [
-            ['I','C','A'], ['I','S','R'], ['S','A','C'], ['A','S','R'], ['R','I','C'],
-            ['S','A','E'], ['I','C','R'], ['C','E','S'], ['E','C','B'], ['I','R','S']
-        ];
-
-        const BUCKET_ADVICE = {
-            en: {
-                R: 'Engineering/Mechanical/EEE - TNEA counselling, Polytechnic diploma after 10th',
-                I: 'Medical/Biology/Chemistry - NEET preparation, BSc courses',
-                A: 'Design/Architecture/Animation - Private institutes + university arts',
-                S: 'Teaching/Nursing/Social work - BEd, paramedical courses',
-                E: 'BBA/Commerce/Entrepreneurship - CA foundation also good',
-                C: 'Government jobs - TNPSC Group exams, clerical posts'
-            },
-            ta: {
-                R: 'பொறியியல்/மெக்கானிக்கல்/எலக்ட்ரிக்கல் - TNEA, 10ம் பின் பாலிடெக்னிக்',
-                I: 'மருத்துவம்/உயிரியல்/ரசாயனம் - NEET, BSc படிப்புகள்',
-                A: 'வடிவமைப்பு/கட்டிடக்கலை/அனிமேஷன் - தனியார் நிறுவனங்கள்',
-                S: 'கற்பித்தல்/நர்சிங்/சமூகப்பணி - BEd, பராமெடிக்கல்',
-                E: 'BBA/வணிகவியல்/தொழில்முனைவு - CA அடிப்படை நல்லது',
-                C: 'அரசு வேலைகள் - TNPSC குரூப் தேர்வுகள்'
-            }
-        };
-
-        // ========================================
-        // INITIALIZATION
-        // ========================================
-      ========================================
-        function setLang(l) {
-            LANG = l;
-            document.documentElement.lang = l;
-            
-            // Update active buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`lang-${l}`).classList.add('active');
-            
-            renderLanguage();
-            renderQuiz();
-            renderQuickButtons();
-        }
-
-        function renderLanguage() {
-            const s = STR[LANG];
-            Object.keys(s).forEach(key => {
-                const el = document.getElementById(key);
-                if (el) el.textContent = s[key];
-            });
-        }
-
-        // ========================================
-        // QUIZ SYSTEM
-        // ========================================
-        function renderQuiz() {
-            const container = document.getElementById('quiz');
-            container.innerHTML = '';
-            const questions = STR[LANG].quizQuestions;
-            
-            questions.forEach((qobj, idx) => {
-                const qdiv = document.createElement('div');
-                qdiv.className = 'question';
-                qdiv.innerHTML = `
-                    <div class="question-number">${idx + 1}</div>
-                    <p>${qobj.q}</p>
-                `;
                 
-                const opts = document.createElement('div');
-                opts.className = 'options';
-                qobj.a.forEach((optText, oidx) => {
-                    const btn = document.createElement('div');
-                    btn.className = 'option';
-                    btn.textContent = optText;
-                    btn.onclick = () => selectAnswer(idx, oidx, btn);
-                    opts.appendChild(btn);
-                });
-                qdiv.appendChild(opts);
-                container.appendChild(qdiv);
-            });
-        }
+                <div class="question-card">
+                    <p id="q2">2. கதை எழுதுவது, ஓவியம் வரைவது அல்லது இசை உருவாக்குவதில் நீங்கள் ஆர்வம் உள்ளவரா? (Are you interested in writing stories, painting, or creating music?)</p>
+                    <label><input type="radio" name="q2" value="arts-hum" required> <span id="q2-opt1">ஆம் (Yes)</span></label><br>
+                    <label><input type="radio" name="q2" value="commerce"> <span id="q2-opt2">இல்லை (No)</span></label>
+                </div>
 
-        function selectAnswer(idx, oidx, btn) {
-            answers[idx] = oidx;
-            const question = btn.closest('.question');
-            question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            btn.classList.add('selected');
-        }
+                 <div class="question-card">
+                    <p id="q3">3. சந்தை போக்குகளைப் பற்றி பகுப்பாய்வு செய்வதிலும், பணம் மற்றும் நிதி மேலாண்மையிலும் நீங்கள் ஆர்வம் உள்ளவரா? (Are you interested in analyzing market trends, and managing money and finance?)</p>
+                    <label><input type="radio" name="q3" value="commerce" required> <span id="q3-opt1">ஆம் (Yes)</span></label><br>
+                    <label><input type="radio" name="q3" value="sci-math"> <span id="q3-opt2">இல்லை (No)</span></label>
+                </div>
+                
+                <button type="button" onclick="submitQuiz()" id="submit-btn">முடிவுகளைப் பார்க்கவும் (See Results)</button>
+            </form>
+        </section>
 
-        function computeQuizResult() {
-            let counts = {R:0, I:0, A:0, S:0, E:0, C:0};
-            let answered = 0;
+        <section class="results-section" id="results-section">
+            <h2 id="results-heading">உங்கள் பரிந்துரைக்கப்பட்ட பாதை (Your Recommended Path)</h2>
+            <div id="suggested-stream" class="stream-result">உங்கள் நாட்டத்தை மதிப்பிடுங்கள் (Take the assessment above)</div>
             
-            for(let i = 0; i < 10; i++) {
-                if(answers[i] !== null) {
-                    const bucket = Q_MAP[i][answers[i]];
-                    counts[bucket]++;
-                    answered++;
+            <h3 id="resources-title">முக்கிய ஆதாரங்கள் மற்றும் இணைப்புகள் (Key Resources & Links)</h3>
+            <ul id="resource-links">
+                </ul>
+
+            <div class="admissions-card">
+                <h4 id="admissions-title">சேர்க்கை வழிகாட்டி (Admissions Guide)</h4>
+                <p id="admissions-content">TNEA, NEET, JEE போன்ற நுழைவுத் தேர்வுகளுக்கான விண்ணப்பப் படிவங்கள் மற்றும் கால அட்டவணைகள் இங்கே கிடைக்கும். (Application forms and schedules for entrance exams like TNEA, NEET, JEE are available here.)</p>
+                <a href="#" id="admissions-link" target="_blank">மேலும் அறிக (Learn More)</a>
+            </div>
+            
+            <div class="scholarship-card">
+                <h4 id="scholarship-title">உதவித்தொகை வாய்ப்புகள் (Scholarship Opportunities)</h4>
+                <p id="scholarship-content">முதல் பட்டதாரி உதவித்தொகை, கல்வி கடன் திட்டங்களுக்கான இணைப்புகள். (Links for First Graduate Scholarship, educational loan schemes.)</p>
+                <a href="#" id="scholarship-link" target="_blank">விண்ணப்பிக்கவும் (Apply Now)</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Pathfinder - தமிழ்நாடு மாணவர்களுக்கான வழிகாட்டி</p>
+    </footer>
+
+    <button id="chatbot-toggle">💬</button>
+    <div id="chatbot-box">
+        <div id="chatbot-header" data-en="Ask a Career Expert" data-ta="ஒரு தொழில் வழிகாட்டியிடம் கேளுங்கள்">ஒரு தொழில் வழிகாட்டியிடம் கேளுங்கள்</div>
+        <div id="chatbot-messages">
+            <div class="message bot-message" id="initial-bot-message">Hello! Ask me any question about career options, courses in Tamil Nadu, or entrance exams!</div>
+        </div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="உங்கள் கேள்வியை இங்கே தட்டச்சு செய்யவும்..." onkeydown="handleChatbotInput(event)">
+            <button id="chatbot-send" onclick="sendMessage()">▶</button>
+        </div>
+    </div>
+
+
+    <script>
+        // --- A. Language Data Dictionary ---
+        const translations = {
+            'en': {
+                'page-title': 'Pathfinder - Career Guidance TN',
+                'header-title': 'Shape Your Future - Pathfinder',
+                'header-subtitle': 'Career Guidance for Students of Class 9 to 12',
+                'mot-heading': 'Explore Your Potential!',
+                'mot-quote': '"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt',
+                'quiz-title': 'Assess Your Aptitude',
+                'q1': '1. Do you enjoy solving complex math problems?',
+                'q1-opt1': 'Yes',
+                'q1-opt2': 'No',
+                'q2': '2. Are you interested in writing stories, painting, or creating music?',
+                'q2-opt1': 'Yes',
+                'q2-opt2': 'No',
+                'q3': '3. Are you interested in analyzing market trends, and managing money and finance?',
+                'q3-opt1': 'Yes',
+                'q3-opt2': 'No',
+                'submit-btn': 'See Results',
+                'results-heading': 'Your Recommended Path',
+                'resources-title': 'Key Resources & Links',
+                'admissions-title': 'Admissions Guide',
+                'admissions-content': 'Application forms and schedules for entrance exams like TNEA, NEET, JEE are available here.',
+                'admissions-link': 'Learn More',
+                'scholarship-title': 'Scholarship Opportunities',
+                'scholarship-content': 'Links for First Graduate Scholarship, educational loan schemes.',
+                'scholarship-link': 'Apply Now',
+                'stream-sci-math': 'Science/Engineering (B.E./B.Tech/B.Sc)',
+                'stream-arts-hum': 'Arts & Humanities (B.A./B.Sc/Law)',
+                'stream-commerce': 'Commerce/Finance (B.Com/CA/BBA)',
+                'suggested-stream': 'Take the assessment above',
+                'initial-bot-message': 'Hello! Ask me any question about career options, courses in Tamil Nadu, or entrance exams!',
+                'chatbot-header': 'Ask a Career Expert',
+                'chatbot-input-placeholder': 'Type your question here...'
+            },
+            'ta': {
+                'page-title': 'உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder',
+                'header-title': 'உங்கள் எதிர்காலத்தை வடிவமைக்கவும் - Pathfinder',
+                'header-subtitle': '9 முதல் 12 ஆம் வகுப்பு மாணவர்களுக்கான தொழில் வழிகாட்டி',
+                'mot-heading': 'உங்கள் திறனை ஆராயுங்கள்!',
+                'mot-quote': '"எதிர்காலம் என்பது, அவர்களின் கனவுகளின் அழகை நம்புபவர்களுக்குச் சொந்தமானது." - எலினோர் ரூஸ்வெல்ட்',
+                'quiz-title': 'உங்கள் நாட்டத்தை மதிப்பிடுங்கள்',
+                'q1': '1. சிக்கலான கணிதப் பிரச்சனைகளைத் தீர்ப்பதில் நீங்கள் மகிழ்ச்சி அடைகிறீர்களா?',
+                'q1-opt1': 'ஆம்',
+                'q1-opt2': 'இல்லை',
+                'q2': '2. கதை எழுதுவது, ஓவியம் வரைவது அல்லது இசை உருவாக்குவதில் நீங்கள் ஆர்வம் உள்ளவரா?',
+                'q2-opt1': 'ஆம்',
+                'q2-opt2': 'இல்லை',
+                'q3': '3. சந்தை போக்குகளைப் பற்றி பகுப்பாய்வு செய்வதிலும், பணம் மற்றும் நிதி மேலாண்மையிலும் நீங்கள் ஆர்வம் உள்ளவரா?',
+                'q3-opt1': 'ஆம்',
+                'q3-opt2': 'இல்லை',
+                'submit-btn': 'முடிவுகளைப் பார்க்கவும்',
+                'results-heading': 'உங்கள் பரிந்துரைக்கப்பட்ட பாதை',
+                'resources-title': 'முக்கிய ஆதாரங்கள் மற்றும் இணைப்புகள்',
+                'admissions-title': 'சேர்க்கை வழிகாட்டி',
+                'admissions-content': 'TNEA, NEET, JEE போன்ற நுழைவுத் தேர்வுகளுக்கான விண்ணப்பப் படிவங்கள் மற்றும் கால அட்டவணைகள் இங்கே கிடைக்கும்.',
+                'admissions-link': 'மேலும் அறிக',
+                'scholarship-title': 'உதவித்தொகை வாய்ப்புகள்',
+                'scholarship-content': 'முதல் பட்டதாரி உதவித்தொகை, கல்வி கடன் திட்டங்களுக்கான இணைப்புகள்.',
+                'scholarship-link': 'விண்ணப்பிக்கவும்',
+                'stream-sci-math': 'அறிவியல்/பொறியியல் (B.E./B.Tech/B.Sc)',
+                'stream-arts-hum': 'கலை மற்றும் மனிதநேயம் (B.A./B.Sc/சட்டம்)',
+                'stream-commerce': 'வர்த்தகம்/நிதி (B.Com/CA/BBA)',
+                'suggested-stream': 'உங்கள் நாட்டத்தை மதிப்பிடுங்கள் (மேலே உள்ள தேர்வை எடுங்கள்)',
+                'initial-bot-message': 'வணக்கம்! தொழில் வாய்ப்புகள், தமிழ்நாட்டில் உள்ள படிப்புகள் அல்லது நுழைவுத் தேர்வுகள் குறித்து ஏதேனும் கேள்விகள் இருந்தால் என்னிடம் கேட்கலாம்!',
+                'chatbot-header': 'ஒரு தொழில் வழிகாட்டியிடம் கேளுங்கள்',
+                'chatbot-input-placeholder': 'உங்கள் கேள்வியை இங்கே தட்டச்சு செய்யவும்...'
+            }
+        };
+
+        let currentLang = 'ta'; // Default to Tamil
+
+        // --- B. Language Switching Function ---
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // 1. Update standard text elements
+            for (const key in t) {
+                const element = document.getElementById(key);
+                if (element && key !== 'initial-bot-message' && key !== 'chatbot-input-placeholder') {
+                    element.textContent = t[key];
+                }
+            }
+
+            // 2. Update placeholders and chat elements
+            document.getElementById('chatbot-input').placeholder = t['chatbot-input-placeholder'];
+            document.getElementById('chatbot-header').textContent = t['chatbot-header'];
+            document.getElementById('initial-bot-message').textContent = t['initial-bot-message'];
+
+            // 3. Update the stream text if results are already shown
+            const streamDiv = document.getElementById('suggested-stream');
+            if (streamDiv.dataset.stream) {
+                displayResults(streamDiv.dataset.stream);
+            }
+            
+            // 4. Update page title
+            document.getElementById('page-title').textContent = t['page-title'];
+        }
+
+        // Set initial language on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+        });
+
+
+        // --- C. Quiz Logic Function ---
+        function submitQuiz() {
+            const form = document.getElementById('aptitude-quiz');
+            const quizData = new FormData(form);
+            const answers = { 'sci-math': 0, 'arts-hum': 0, 'commerce': 0 };
+
+            // Check if all required questions are answered
+            let allAnswered = true;
+            for (let i = 1; i <= 3; i++) {
+                if (!quizData.get('q' + i)) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+
+            if (!allAnswered) {
+                alert(currentLang === 'ta' ? 'அனைத்து கேள்விகளுக்கும் பதிலளிக்கவும்.' : 'Please answer all questions.');
+                return;
+            }
+
+            // Simple Scoring Mechanism
+            for (const [name, value] of quizData.entries()) {
+                if (answers.hasOwnProperty(value)) {
+                    answers[value]++;
+                }
+            }
+
+            // Determine the highest score
+            let maxScore = -1;
+            let suggestedStream = 'arts-hum'; // Default stream
+
+            for (const stream in answers) {
+                if (answers[stream] > maxScore) {
+                    maxScore = answers[stream];
+                    suggestedStream = stream;
                 }
             }
             
-            const sorted = Object.keys(counts).sort((a,b) => counts[b] - counts[a]);
-            const top3 = sorted.slice(0, 3).filter(k => counts[k] > 0);
-            
-            return { counts, top3, answered, complete: answered === 10 };
+            displayResults(suggestedStream);
+            // Scroll to results section
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function showQuizResult() {
-            const result = computeQuizResult();
-            const resultBox = document.getElementById('result-box');
-            const s = STR[LANG];
-            const bnames = BUCKET_NAMES[LANG];
+        // --- D. Dynamic Results & Resources Display ---
+        function displayResults(streamKey) {
+            const resultsDiv = document.getElementById('suggested-stream');
+            const linksList = document.getElementById('resource-links');
+            const t = translations[currentLang];
             
-            if(result.top3.length === 0) {
-                resultBox.innerHTML = `
-   <h3>⚠️ Please answer some questions</h3>
-                    <p>Select at least 3-5 answers to get personalized career suggestions!</p>
-                `;
-                document.getElementById('result-area').style.display = 'block';
-                return;
+            const streamNameKey = 'stream-' + streamKey;
+            resultsDiv.textContent = t[streamNameKey] || streamKey;
+            resultsDiv.dataset.stream = streamKey; // Store the key for language toggle
+
+            linksList.innerHTML = ''; // Clear previous links
+
+            // Define Resources based on the suggested stream
+            let resources = [];
+            let admissionsLink = 'https://www.tneaonline.org/'; // Default admission link
+            let scholarshipLink = 'https://www.tnesc.in/'; // Default scholarship link
+
+            if (streamKey === 'sci-math') { // Science/Engineering
+                resources = [
+                    { text: 'TNEA Counselling Official Website (Engineering)', href: 'https://www.tneaonline.org/' },
+                    { text: 'NEET Official Site (Medical/Health Science)', href: 'https://neet.nta.nic.in/' },
+                    { text: 'Tamil Nadu BSc Agriculture Admissions', href: 'https://tnau.ac.in/' }
+                ];
+                admissionsLink = 'https://www.tneaonline.org/';
+            } else if (streamKey === 'commerce') { // Commerce/Finance
+                resources = [
+                    { text: 'The Institute of Chartered Accountants of India (ICAI)', href: 'https://www.icai.org/' },
+                    { text: 'List of Top B.Com Colleges in Chennai', href: '#' },
+                    { text: 'National Stock Exchange (NSE) Courses', href: '#' }
+                ];
+                admissionsLink = '#';
+            } else if (streamKey === 'arts-hum') { // Arts & Humanities/Law
+                 resources = [
+                    { text: 'Tamil Nadu Dr. Ambedkar Law University Admissions', href: 'https://tndalu.ac.in/' },
+                    { text: 'UPSC/TNPSC Exam Guidance Resources', href: '#' },
+                    { text: 'List of Top Arts & Science Colleges in Tamil Nadu', href: '#' }
+                ];
+                admissionsLink = 'https://tndalu.ac.in/';
             }
             
-            let html = `
-                <h3>🎯 Your Top Career Interests</h3>
-                <div style="margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">
-                    ${result.complete ? 'Perfect! You completed all questions.' : `You answered ${result.answered}/10 questions.`}
-                </div>
-            `;
-            
-            result.top3.forEach((code, rank) => {
-                html += `
-                    <div style="margin-bottom: 18px;">
-                        <div style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--accent-purple);">
-                            ${rank + 1}. ${bnames[code]}
-                        </div>
-                        <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-${rank === 0 ? 'green' : rank === 1 ? 'blue' : 'orange'});">
-                            ${BUCKET_ADVICE[LANG][code]}
-                        </div>
-                    </div>
-                `;
+            // Update admission and scholarship links
+            document.getElementById('admissions-link').href = admissionsLink;
+            document.getElementById('scholarship-link').href = scholarshipLink;
+
+            // Populate the resource list
+            resources.forEach(res => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = res.href;
+                link.target = "_blank";
+                link.textContent = res.text;
+                listItem.appendChild(link);
+                linksList.appendChild(listItem);
             });
-            
-            html += `
-                <hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent); margin: 25px 0;">
-                <div style="font-weight: 700; color: var(--accent-green); margin-bottom: 15px;">📋 Tamil Nadu Next Steps:</div>
-                <ul style="font-size: 14px; line-height: 1.6;">
-                    <li><strong>TNEA Engineering:</strong> Register at tneaonline.org (June-July 2025)</li>
-                    <li><strong>NEET Medical:</strong> 550+ score needed for govt colleges</li>
-                    <li><strong>TNPSC Jobs:</strong> Group 4 (7000+ vacancies) - start now!</li>
-                    <li><strong>Scholarships:</strong> BC/MBC/SC full fee waiver via e-Kalvi</li>
-                </ul>
-                <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-radius: 12px; font-size: 14px;">
-                    💡 <strong>Pro Tip:</strong> Meet your school counsellor + check official websites for 2025 dates!
-                </div>
-            `;
-            
-            resultBox.innerHTML = html;
-            document.getElementById('result-area').style.display = 'block';
-            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        function resetQuiz() {
-            answers = Array(10).fill(null);
-            document.getElementById('quiz').querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            document.getElementById('result-area').style.display = 'none';
-            renderQuiz();
+
+        // --- E. Chatbot Logic (Rule-Based AI) ---
+
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotBox = document.getElementById('chatbot-box');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+
+        chatbotToggle.onclick = () => {
+            const isVisible = chatbotBox.style.display === 'flex';
+            chatbotBox.style.display = isVisible ? 'none' : 'flex';
+            chatbotToggle.textContent = isVisible ? '💬' : '✖';
+        };
+
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = text;
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to bottom
         }
 
-        // ========================================
-        // CHAT SYSTEM
-        // ========================================
-      function addMessage(text, sender) {
-            const messages = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-            messageDiv.innerHTML = text.replace(/
-/g, '<br>');
-            messages.appendChild(messageDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
-
-        function showTyping() {
-            document.getElementById('typingIndicator').style.display = 'block';
-            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
-        }
-
-        function hideTyping() {
-            document.getElementById('typingIndicator').style.display = 'none';
-        }
-
-        async function getAIResponse(query) {
-            const q = query.toLowerCase();
-            
-            // Tamil Nadu Career Knowledge Base
-            if (q.includes('tnea') || q.includes('counselling') || q.includes('engineering')) {
-                return `🎓 <strong>TNEA 2025 Counselling Guide</strong>
-
-📅 <strong>Key Dates:</strong>
-• Rank List: June 2025
-• Choice Filling: July 2025
-• Round 1: July end
-
-✅ <strong>Process:</strong>
-1. Register: tneaonline.org
-2. Fill 100+ choices
-3. Pay ₹5,000 fee
-4. Download allotment
-
-📄 <strong>Top Branches:</strong> CSE(70%+), ECE(65%+), IT
-💰 <strong>Fees:</strong> Govt: ₹50K/year | Anna Univ best placements`;
+        function handleChatbotInput(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
             }
-            
-            if (q.includes('tnpsc') || q.includes('group') || q.includes('government')) {
-                return `🏛️ <strong>TNPSC 2025 Job Updates</strong>
-
-🔥 <strong>Active Exams:</strong>
-• Group 4: 7,000+ vacancies
-• Group 1: 85+ posts (Collector/DSP)
-• SI: 1,500 posts
-
-📚 <strong>Preparation:</strong>
-• Samacheer + Standard books
-• The Hindu daily
-• TN Current Affairs crucial
-• Tamil medium advantage`;
-            }
-            
-            if (q.includes('scholarship') || q.includes('தவி')) {
-                return `💰 <strong>TN Scholarships 2025</strong>
-
-🎁 <strong>Key Schemes:</strong>
-• BC/MBC: ₹12,500/year
-• SC: Full fee waiver
-• CM Laptop Scheme
-• Post-Matric: All communities
-
-📱 <strong>Apply:</strong> e-Kalvi portal
-⏰ <strong>Deadline:</strong> July 31, 2025`;
-            }
-            
-            if (q.includes('medical') || q.includes('neet') || q.includes('mbbs')) {
-                return `🩺 <strong>TN Medical Admissions 2025</strong>
-
-🎯 <strong>NEET Cutoffs (Govt):</strong>
-• MBBS: 550-600+
-• BDS: 500-550
-• 85% seats for TN students
-
-🏥 <strong>Top Colleges:</strong>
-1. Madras Medical College
-2. Stanley Medical
-3. Coimbatore MC
-
-🌐 Counselling: tnmedicalselection.net`;
-            }
-            
-            return `🤔 Great question about your career!
-
-📋 <strong>Quick TN Career Checklist:</strong>
-• Check official sites (tneaonline.org, tnpsc.gov.in)
-• Take the quiz above for personalized paths
-• Visit District Employment Office
-• Join TN student Telegram/WhatsApp groups
-
-💬 Ask me specifically about TNEA, TNPSC, scholarships, or any course!`;
         }
 
         function sendMessage() {
-            const input = document.getElementById('userInput');
-            const message = input.value.trim();
-            if (!message) return;
-            
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+
             addMessage(message, 'user');
-            input.value = '';
-            
-            showTyping();
-            
-            setTimeout(async () => {
-                const response = await getAIResponse(message);
-                hideTyping();
-                addMessage(response, 'ai');
-            }, 1500 + Math.random() * 1500);
+            chatbotInput.value = '';
+
+            // Simulate AI delay
+            setTimeout(() => {
+                const response = generateAIResponse(message);
+                addMessage(response, 'bot');
+            }, 1000); // 1 second delay
         }
 
-        function renderQuickButtons() {
-            const container = document.getElementById('quickButtons');
-            container.innerHTML = '';
-            STR[LANG].quickButtons.forEach(text => {
-                const btn = document.createElement('button');
-                btn.className = 'quick-btn';
-                btn.textContent = text;
-                btn.onclick = () => {
-                    document.getElementById('userInput').value = text;
-                    sendMessage();
-                };
-                container.appendChild(btn);
-            });
-        }
+        // The core of the "Free Open Source AI" (Rule-Based Logic)
+        function generateAIResponse(userInput) {
+            const inputLower = userInput.toLowerCase();
+            const lang = currentLang;
+            const t = translations[lang];
 
-        // ========================================
-        // PARTICLE SYSTEM
-        // ========================================
-        function createParticles() {
-            const container = document.getElementById('particles');
-            if (container.children.length > 60) return;
-            
-            for (let i = 0; i < 5; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                container.appendChild(particle);
+            // 1. Keyword-based responses (Career Stream)
+            if (inputLower.includes('engineering') || inputLower.includes('பொறியியல்')) {
+                return lang === 'ta' 
+                    ? `பொறியியல் துறையில், CSE (கணினி அறிவியல்), ECE (எலக்ட்ரானிக்ஸ்) மற்றும் மெக்கானிக்கல் போன்ற பல்வேறு பிரிவுகள் உள்ளன. TNEA (தமிழ்நாடு பொறியியல் சேர்க்கை) மூலம் சேர்க்கை பெறலாம். நீங்கள் கணிதத்தில் கவனம் செலுத்த வேண்டும்.`
+                    : `In Engineering, you have branches like CSE, ECE, Mechanical, and more. Admission is primarily through TNEA (Tamil Nadu Engineering Admissions). Focus on Math and Science subjects.`;
             }
-        }
-
-        // ========================================
-        // EVENT LISTENERS
-        // ========================================
-      function setupEventListeners() {
-            // Language toggle
-            document.getElementById('lang-en').onclick = () => setLang('en');
-            document.getElementById('lang-ta').onclick = () => setLang('ta');
             
-            // Chat
-            document.getElementById('sendBtn').onclick = sendMessage;
-            document.getElementById('userInput').onkeypress = (e) => {
-                if (e.key === 'Enter') sendMessage();
-            };
-            
-            // Quiz
-            document.getElementById('submit-quiz').onclick = showQuizResult;
-            document.getElementById('reset-quiz').onclick = resetQuiz;
-        }
+            if (inputLower.includes('neet') || inputLower.includes('medical') || inputLower.includes('மருத்துவம்')) {
+                return lang === 'ta' 
+                    ? `மருத்துவப் படிப்புகளுக்கு (MBBS/BDS) தேசிய தகுதி மற்றும் நுழைவுத் தேர்வு (NEET) கட்டாயம். நீங்கள் உயிரியல் மற்றும் வேதியியல் பிரிவுகளில் அதிக மதிப்பெண்களை இலக்காகக் கொள்ள வேண்டும்.`
+                    : `For Medical courses (MBBS/BDS), the National Eligibility cum Entrance Test (NEET) is mandatory. You must focus on scoring high in Biology and Chemistry.`;
+            }
 
-        // ========================================
-        // START APP
-        // ========================================
-        window.addEventListener('load', init);
+            if (inputLower.includes('commerce') || inputLower.includes('b.com') || inputLower.includes('வர்த்தகம்')) {
+                return lang === 'ta'
+                    ? `B.Com படிப்புகள் நிதி, கணக்கியல் மற்றும் வணிக நிர்வாகத்தில் கவனம் செலுத்துகின்றன. CA (பட்டயக் கணக்காளர்) போன்ற தொழில்களுக்கு இது ஒரு நல்ல தொடக்கமாகும். மாநிலக் கல்லூரி சேர்க்கைக்கு 12ஆம் வகுப்பு மதிப்பெண்கள் போதும்.`
+                    : `B.Com courses focus on finance, accounting, and business management. It's a great start for careers like CA (Chartered Accountant). 12th board marks are usually sufficient for state college admissions.`;
+            }
+
+            // 2. Simple greeting and general questions
+            if (inputLower.includes('hello') || inputLower.includes('hi') || inputLower.includes('வணக்கம்')) {
+                return lang === 'ta' 
+                    ? `வணக்கம்! நான் ஒரு தொழில் வழிகாட்டி நிபுணர். உங்களுக்கு எப்படி உதவ முடியும்?`
+                    : `Hello! I am a career guidance expert. How can I help you today?`;
+            }
+            
+            if (inputLower.includes('scholarship') || inputLower.includes('உதவித்தொகை')) {
+                return lang === 'ta' 
+                    ? `தமிழ்நாட்டில் முதல் பட்டதாரி உதவித்தொகை (First Graduate Scholarship) மற்றும் மத்திய அரசின் பல்வேறு உதவித்தொகை திட்டங்கள் உள்ளன. மேலும் விவரங்களுக்கு மேலே உள்ள 'உதவித்தொகை வாய்ப்புகள்' பகுதியைச் சரிபார்க்கவும்.`
+                    : `Tamil Nadu offers the First Graduate Scholarship and various Central Government schemes. Please check the 'Scholarship Opportunities' section above for links.`;
+            }
+
+            // 3. Default/Fallback response
+            return lang === 'ta'
+                ? `நான் ஒரு அடிப்படை மென்பொருள் வழிகாட்டி. நீங்கள் கேட்கும் கேள்விக்கு சரியான பதில் இல்லை. தயவுசெய்து 'பொறியியல்', 'மருத்துவம்' அல்லது 'B.Com' போன்ற முக்கிய வார்த்தைகளைப் பயன்படுத்தி மீண்டும் முயற்சிக்கவும்.`
+                : `I am a basic rule-based guide. I don't have a specific answer for that. Please try again with keywords like 'Engineering', 'NEET', or 'B.Com'.`;
+        }
     </script>
+
 </body>
 </html>
